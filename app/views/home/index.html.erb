@@ -1,0 +1,32 @@
+<%= render :partial => '/templates/civil' %>
+<%= render :partial => '/templates/development' %>
+<%= render :partial => '/templates/diplomacy' %>
+<%= render :partial => '/templates/info' %>
+<%= render :partial => '/templates/market' %>
+<%= render :partial => '/templates/military' %>
+<%= render :partial => '/templates/move' %>
+<%= render :partial => '/templates/officers' %>
+<%= render :partial => '/templates/personel' %>
+<%= render :partial => '/templates/report' %>
+
+<%= render :partial => '/shared/rotk_header' %>
+<%= render :partial => '/shared/navbar' %>
+
+<div id='page' class='container'>
+  <div class='col-xs-10 center'>
+    <%= render :partial => 'province_header' %>
+    <div class='row col-sm-12 animated slideInRight' id='details_container'>
+      <div class='col-sm-12' id='content'>
+        <%= render :partial => 'info' %>
+        <%# = render :partial => 'civil' %>
+        <%# = render :partial => 'development' %>
+        <%# = render :partial => 'diplomacy' %>
+        <%# = render :partial => 'market' %>
+        <%# = render :partial => 'military' %>
+        <%# = render :partial => 'move' %>
+        <%# = render :partial => 'personel' %>
+      </div>
+    </div>
+  </div>
+</div>
+<%#= render :partial => 'right_nav' %>

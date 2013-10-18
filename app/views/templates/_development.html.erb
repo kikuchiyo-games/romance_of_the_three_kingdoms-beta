@@ -1,0 +1,47 @@
+<script type='template/javascript' id='development-index-template'>
+  <h5>development</h5>
+  <div class='col-sm-12 clearfix'>
+    <h5>Growth</h5>
+    <button class='btn general_assignment_form-development' data-action='invest in land' data-details="invest how much?" type='button'>land</button>
+    <button class='btn general_assignment_form-development' data-action='invest in commerce' data-details="invest how much?" type='button'>commerce</button>
+  </div> 
+  <div class='col-sm-12 clearfix'>
+    <h5>Loss Prevention</h5>
+    <button class='btn general_assignment_form-development' data-action='invest in flood protection' data-details="invest how much?" type='button'>flood</button>
+    <button class='btn general_assignment_form-development' data-action='invest in fire protection' data-details="invest how much?" type='button'>fire</button>
+    <button class='btn general_assignment_form-development' data-action='invest in earthquake protection' data-details="invest how much?" type='button'>earthquake</button>
+  </div> 
+</script>
+
+<script type='template/javascript' id='development-details-template'>
+  <div class='media col-md-12 animated report-view form-group'>
+    <label class='form-label pull-left'>{{details}}</label>
+    <div class='col-xs-12'>
+      <input id='development_value' type='text' class='form-control' placeholder='...'/>
+    </div>
+  </div>
+</script>
+
+<script type='template/javascript' id='development-container-template'>
+  <div class='col-md-12'>
+    <div id='generals_list' class='well'>
+    </div>
+
+    <div id='development_details'>
+    </div>
+
+    <button class='btn btn-primary implement-{{action}}' type='button'>{{button}}!</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='development-general-template'>
+  <div class="media col-md-12 animated report-view">
+    <a class="pull-left" href="#"> <img class="media-object" src="{{general.avatar}}" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{general.name}}</h4>
+      {{attribute.name}}: {{attribute.value}}
+      <input type='checkbox'/>
+    </div>
+  </div>
+</script>
+

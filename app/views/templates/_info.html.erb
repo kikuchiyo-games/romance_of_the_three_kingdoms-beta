@@ -1,0 +1,64 @@
+<script type='template/javascript' id='info-index-template'>
+  <div class='col-xs-12 clearfix container-fluid'>
+    <div class='col-sm-12'>
+      <table class='col-sm-4 table'> 
+        <thead> 
+          <tr class='animated col-xs12 table-header'> 
+            <td> Domestic 
+              <span class='_badge text-right' style='position: absolute;'>
+                <img class='table-scroller' src='assets/scroll-seal.png' />
+              </span> 
+            </td> 
+            <td>&nbsp;</td> 
+          </tr> 
+        </thead>
+        <tbody style='display:none;'>
+          <tr class='animated col-xs12'><td>People</td> <td class='_badge text-right'>  {{obj.populace}}</td></tr>
+          <tr class='animated col-xs12'><td>Loyalty </td> <td class='_badge text-right'>{{obj.loyalty}} </td></tr>
+          <tr class='animated col-xs12'><td>Safety  </td> <td class='_badge text-right'>{{obj.safety}}  </td></tr>
+          <tr class='animated col-xs12'><td>Gold    </td> <td class='_badge text-right'>{{obj.gold}}    </td></tr>
+          <tr class='animated col-xs12'><td>Rice    </td> <td class='_badge text-right'>{{obj.rice}}    </td></tr>
+        </tbody>
+        <tfoot> <tr class='animated col-xs12'><td></td> <td class='_badge text-right'></td></tr> </tfoot>
+      </table>
+    </div>
+    <div class='col-sm-12'>
+      <table class='col-sm-4 table' > 
+        <thead> <tr class='animated col-xs12 table-header'><td> Military <span class='_badge text-right' style='position: absolute;'><img class='table-scroller' src='assets/scroll-seal.png' /></span></td> <td class='_badge text-right'></td></tr> </thead>
+        <tbody style='display:none;'>
+          <tr class='animated col-xs12'><td>Troops  </td> <td class='_badge text-right'>   {{obj.troops}}         </td></tr>
+          <tr class='animated col-xs12'><td>Generals</td> <td class='_badge text-right'>   {{obj.generals}}       </td></tr>
+          <tr class='animated col-xs12'><td>Prospects  </td> <td class='_badge text-right'>{{obj.free_generals}}  </td></tr>
+          <tr class='animated col-xs12'><td>Castle  </td> <td class='_badge text-right'>   {{obj.castle_defenses}}</td></tr>
+          <tr class='animated col-xs12'><td>Gates   </td> <td class='_badge text-right'>   {{obj.castle_defenses}}</td></tr>
+        </tbody>
+        <tfoot> <tr class='animated col-xs12'><td></td> <td class='_badge text-right'></td></tr> </tfoot>
+      </table>
+    </div>
+    
+    <div class='col-sm-12'>
+      <table class='col-sm-4 table'> 
+        <thead> <tr class='animated col-xs12 table-header'><td> Development <span class='_badge text-right' style='position: absolute;'><img class='table-scroller' src='assets/scroll-seal.png' /></span></td> <td class='_badge text-right'></td></tr> </thead>
+        <tbody style='display:none;'>
+          <tr class='animated col-xs12'><td>Land       </td><td class='_badge text-right'>{{obj.land}}             </td></tr>
+          <tr class='animated col-xs12'><td>Flood      </td><td class='_badge text-right'>{{obj.flood}}            </td></tr>
+          <tr class='animated col-xs12'><td>Earthquake </td><td class='_badge text-right'>{{obj.earthquake}}       </td></tr>
+          <tr class='animated col-xs12'><td>Fire       </td><td class='_badge text-right'>{{obj.fire}}             </td></tr>
+          <tr class='animated col-xs12'><td>Merchants  </td><td class='_badge text-right'>{{obj.merchants_present}}</td></tr>
+        </tbody>
+        <tfoot> <tr class='animated col-xs12'><td></td> <td class='_badge text-right'></td></tr> </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class='col-sm-12 clearfix'>
+    <h5 class='col-sm-12 clearfix'>view</h5>
+
+    <div class='col-sm-12 clearfix'>
+      <button class='btn disabled' type='button'>province</button>
+      <button class='btn disabled' type='button'>generals</button>
+      <button class='btn disabled' type='button'>map</button>
+    </div> 
+  </div>
+
+</script>

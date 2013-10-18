@@ -1,0 +1,48 @@
+<script type='template/javascript' id='report-details-container-template'>
+  <div id='report-details-container' class="col-md-12 animated fadeIn well" style="position:absolute; z-index: 100;">
+    <button class='btn btn-danger details-closer' type='button'>close</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='report-details-item-template'>
+  <div class="media col-md-12 animated flipInX report-view alert-{{type}}"'>
+    <a class="pull-left" href="#"> <img class="media-object img-circle" src="assets/avatar-xun-yu.jpeg" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{subject}}</h4>
+      {{message}}
+    </div>
+  </div>
+</script>
+
+<script type='template/javascript' id='report-action-required-template'>
+  <div class="media col-md-12 animated bounce report-view alert-{{type}}">
+    <a class="pull-left" href="#"> <img class="media-object img-circle" src="assets/avatar-xun-yu.jpeg" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">report! </h4>
+      {{message}}
+    </div>
+    <button class='btn disabled btn-success' type='button'>prepare</button>
+    <button class='btn disabled btn-danger' type='button'>flee</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='report-index-template'>
+  <div class="media col-md-12 animated flipInX report-view alert-{{type}}" style='position:absolute; z-index: 100;'>
+    <a class="pull-left" href="#"> <img class="media-object img-circle" src="assets/avatar-xun-yu.jpeg" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">report </h4>
+      {{message}}
+    </div>
+    <button class='btn btn-danger closer' type='button'>close</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='report-request-info-template'>
+  <div class="media col-md-12 animated flipInX report-view alert-{{type}}"'>
+    <a class="pull-left" href="#"> <img class="media-object img-circle" src="assets/avatar-xun-yu.jpeg" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{subject}}</h4>
+      {{message}}
+    </div>
+  </div>
+</script>

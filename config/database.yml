@@ -1,0 +1,24 @@
+test:
+  adapter: mysql2
+  database: test_romance_of_the_three_kingdoms
+  user: root
+  password:
+  host: localhost
+  encoding: utf8
+
+development:
+  adapter: mysql2
+  database: development_romance_of_the_three_kingdoms
+  user: root
+  password:
+  host: localhost
+  encoding: utf8
+ 
+production:
+  adapter: mysql2
+  database: romance_of_the_three_kingdoms
+  user: root
+  password:
+  host: localhost
+  encoding: utf8
+

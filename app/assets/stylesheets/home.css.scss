@@ -1,0 +1,173 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url("fonts.css.scss");
+@import url("header.css.scss");
+@import url("nav.css.scss");
+@import url("maps.css.scss");
+
+body {
+  //background-color:black;
+  //background-image: url('black-marble-bg.jpeg');
+  //background-position: fixed;
+  //background-size: 100%;
+
+  .center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+  }
+
+  button.btn {
+    -webkit-box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+    box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+  }
+
+  background-repeat: no-repeat;
+  //background-size: 100% 200%;
+  #right-sidebar {
+    float:right;
+  }
+
+  #page {
+    //width: 753px;
+    max-width: 550px;
+    background-image: url('paper.jpg');
+    background-size: 100%;
+    -webkit-box-shadow: inset 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+    box-shadow: inset 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+    .well {
+      -webkit-box-shadow: inset 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+      box-shadow: inset 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
+    }
+  
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+
+    font-family: 'Star Jedi'; 
+    color: black;
+  
+    h3, h5 {
+      font-family: 'Star Jedi';
+  
+      span { 
+        text-shadow: white 1px 1px 1px; 
+
+        color: black; 
+      }
+    }
+  
+    h4 span { 
+      color: black; 
+      text-shadow: white 1px 1px 1px;
+    }
+ 
+  
+    .nav span { color: gray; float:right;}
+  
+    tbody {
+      display: block;
+    }
+
+    .table-header {
+      color: #8D2626;
+      font-weight: bold;
+      font-family: 'Feathergraphy Decoration';
+      -webkit-transform: rotate(-2deg); 
+      -moz-transform: rotate(-2deg);	
+      img {cursor:pointer;}
+      //td { 
+      //  background-image: none !important;
+      //  background-color: rgba(0,0,0,0);
+      //}
+    }
+
+    #view-content {
+      button {
+        margin-bottom: 10px;
+      }
+      .report-view {
+        position:relative;
+        //right:0;
+        z-index: 99;
+        //background-color: white;
+      }
+    }
+
+    table { 
+      margin-left: -10px;
+      color: black; 
+      letter-spacing: 5px;
+      font-family: 'Star Jedi';
+      width: 250px; 
+      height: 320px;
+      background-repeat: no-repeat; 
+      background-image: url(scroll-bg.png); 
+      background-position: 0px -8px; 
+      background-repeat: no-repeat; 
+      background-color: rgba(238, 238, 238, 0); 
+
+      tr {
+        td {
+          border: none !important;
+          padding-left: 20px;
+        }
+      }
+
+      thead tr {
+        td:first-child {
+          padding-left: 20px;
+        }
+
+        td:last-child {
+          display: block;
+          padding: 0px;
+          margin: 0px;
+          width: 1px;
+        }
+      }
+
+      tbody { font-size: 10px; }
+
+      //tfoot.closed {
+      //  background-image: url(scroll-closed-bg.png); 
+      //  tr {
+      //    height: 30px;
+      //    -webkit-transform: rotate(-2deg); 
+      //    -moz-transform: rotate(-2deg);	
+
+      //    width: 100%; 
+      //    padding: 0px !important;
+      //  }
+      //}
+      //tfoot tr { background-image: url(scroll-closed-bg.png); height: 10px; }
+    }
+
+    nav { 
+      font-family: 'Star Jedi'; 
+
+      span:last-child {
+        font-size: 10px;
+        
+      }
+    }
+  
+    .media {
+      text-shadow: white 1px 1px 1px;
+      color: black;
+    }
+  
+    .media, .media h4 { 
+      margin-top:0px;
+      margin-bottom:20px;
+  
+      font-family: 'Star Jedi';
+    }
+  
+    #province_title {
+      margin-top: 5px;
+      height: 60px;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+== A Romance of Three Kingdoms
+  A game to simulate the Three Kingdoms era of China.
+
+=== Models
+  1. Provinces
+    has one ruler
+    has one prefect
+    has many officers
+    has many neighboring provinces
+    has many battle fields  
+    has many castles
+
+  2. Officers
+  
+  3. Prefects
+    is a type of officer that governs a province
+  
+  4. Rulers
+    is a type of officer that is also a warlord
+
+  5. BattleFields
+    has many castles 
+
+  6. Players
+    user interacting with application
+
+  7. Castles
+
+  8. Gates
+
+  9. TroopTypes
+    meta data on attributes of troop types
+    offensive and defensive capabilities in different terrains and situations
+    
+=== Controllers
+  1. Players
+    signup
+
+  3. Sessions
+    login
+
+  2. Provinces
+    from here the user
+      a. controls military and civil state of province
+      b. interacts with officers and other provinces
+      c. launches invasions and prepares to defend
+      d. plays out battles if the defender loses on the battle field
+
+  3. BattleField
+    has officers sent out to battles
+    has castles maintained from the province
+    has gates maintained from the province
+
+  4. Castles
+    updates state of castle
+    you may also perform assassinations and kidnappings in enemy castles
+    diplomacy occurs here
+
+  4. Gates
+    updates state of gate
+
+=== Views
+  province#index
+    1. info: summary information on the province
+    2. civil: interface for updating civil attributes of province
+    3. diplomacy: interface for interacting with other provinces
+    4. market: interface for purchasing and selling items
+    4. military: interface for updating military attributes of province
+    5. development: interface for developing land and natural disaster controls
+    6. personel: interface for interacting with officers - including recruitment, rewards, and punishments
+==== Technologies    
+  1. Using bootstrap 
+  2. Should use Backbone for various info, civil, deplomacy, etc... views

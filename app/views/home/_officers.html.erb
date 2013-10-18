@@ -1,0 +1,41 @@
+    <% # prototype data...
+      officers = [
+        { name:'Zhang Liao',  loyalty: 100, title: 'Lead Tiger General',  war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 91 },
+        { name:'Xiahou Dun',  loyalty: 100, title: 'Tiger General',       war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 84 },
+        { name:'Xiahou Yuan', loyalty: 100, title: 'Tiger General',       war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 80 },
+        { name:'Sima Yi',     loyalty: 100, title: 'Tutor to the Prince', war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 99 },
+        { name:'Xu Yu',       loyalty: 100, title: 'Lead Strategist',     war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 97 },
+        { name:'Xun Yu',      loyalty: 100, title: 'Strategist',          war: 91, leadership: 95, politics: 85, charisma: 80, intelligence: 95 },
+        { name:'Cao Ren',     loyalty: 100, title: 'Liutenant General',   war: 81, leadership: 85, politics: 75, charisma: 78, intelligence: 85 }
+      ]
+    %>
+
+    <h5> officers </h5>
+    <table class='table clearfix'>
+      <thead> 
+        <tr> 
+          <td class='animated'>Name</td>
+          <td class='animated'>Loyalty</td>
+          <td class='animated'>Title</td>
+          <td class='animated'>Intelligence</td>
+          <td class='animated'>War</td>
+          <td class='animated'>Politics</td>
+          <td class='animated'>Leadership</td>
+          <td class='animated'>Charisma</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% officers.each do |officer| %>
+          <tr> 
+            <td><%=officer[:name]%></td>
+            <td><%=officer[:loyalty]%></td>
+            <td><%=officer[:title]%></td>
+            <td><%=officer[:intelligence]%></td>
+            <td><%=officer[:war]%></td>
+            <td><%=officer[:politics]%></td>
+            <td><%=officer[:leadership]%></td>
+            <td><%=officer[:charisma]%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>

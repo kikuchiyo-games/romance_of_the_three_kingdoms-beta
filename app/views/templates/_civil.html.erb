@@ -1,0 +1,42 @@
+<script type='template/javascript' id='civil-details-template'>
+  <div class='media col-md-12 animated report-view form-group'>
+    <label class='form-label pull-left'>{{details}}</label>
+    <div class='col-xs-12'>
+      <input id='military_value' type='text' class='form-control' placeholder='...'/>
+    </div>
+  </div>
+</script>
+
+<script type='template/javascript' id='civil-index-template'>
+  <h5>civil</h5>
+  <div class='col-sm-12 clearfix'>
+    <button class='btn general_assignment_form-civil' data-action='give rice to' data-details="give how much rice?" type='button'>give rice</button>
+    <button class='btn general_assignment_form-civil' data-action='give gold to' type='button' data-details="give how much gold?">give gold</button>
+    <button class='btn general_assignment_form-civil' data-action='tax' type='button' data-details="set the tax rate:">tax</button>
+    <button class='btn general_assignment_form-civil' data-action='patrol for' type='button'>patrol</button>
+  </div> 
+</script>
+
+<script type='template/javascript' id='civil-container-template'>
+  <div class='col-md-12'>
+    <div id='generals_list' class='well'>
+    </div>
+
+    <div id='civil_details'>
+    </div>
+
+    <button class='btn btn-primary implement-{{action}}' type='button'>{{button}}!</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='civil-general-template'>
+  <div class="media col-md-12 animated report-view">
+    <a class="pull-left" href="#"> <img class="media-object" src="{{general.avatar}}" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{general.name}}</h4>
+      {{attribute.name}}: {{attribute.value}}
+      <input type='checkbox'/>
+    </div>
+  </div>
+</script>
+
