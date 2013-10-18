@@ -1,5 +1,10 @@
 class window.MarketView extends Backbone.View
 
+  # 415 5156504
+  # Sell yourself on Ruby on Rails...
+
+  persistant_systems: { 'full-time position', 'mid-level is ok.' }
+  
   el: '#view-content'
 
   render: ->
@@ -14,7 +19,7 @@ class window.MarketView extends Backbone.View
   initialize: ->
     @fake_generals = [
       { intelligence: '85%', charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
-      { intelligence: '95%', charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
+      { intelligence: '95%', charm: '90%', leadership: '90%', name: 'xun yu',     war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'     }
     ]
     @
 
@@ -31,7 +36,7 @@ class window.MarketView extends Backbone.View
 
   open_info_dialog: (options)->
     action = options.action.split('_').join(' ')
-    window.nav_view.sub_views['report'].request_info(subject: "#{action} the people", message: "who will #{action}?")
+    window.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?")
     if options.details?
       $('#development_details').html(_.template($('#development-details-template').html(), {details: options.details}))
 
