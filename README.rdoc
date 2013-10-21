@@ -1,5 +1,6 @@
 == A Romance of Three Kingdoms
-  A game to simulate the Three Kingdoms era of China.
+  A game to simulate the Three Kingdoms era of China.  
+  Combine best parts from the popular series and other late eighties / early nineties and rpg / strategy games.
 
 == DEVELOPMENT SETUP
   git clone git@github.com:kirkwood-jimenez-games/romance_of_the_three_kingdoms-beta.git
