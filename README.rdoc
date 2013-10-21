@@ -14,8 +14,12 @@
   to get a feel for possible ui/ux
 
 == NEXT UP TODOS
-  validate input on forms
-  ensure best ux in forms
+  validate checkboxes on officer selects in forms
+  display real officers in views, ie - NO STUBBING WITH FAKE DATA
+  existing views should be province/show controller/actions
+  ux -> on a users turn (currently always on)
+    user will perform province activities and go on to next province once done?
+    user will observe provinces from a map and select province, perform actions and indicate when done with their turn?
 
 == BACKEND DESCRIPTION
 
