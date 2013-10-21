@@ -1,4 +1,4 @@
-class window.InfoView extends Backbone.View
+class window.InfoView extends window.FormView
   el: 'body'
 
   events:

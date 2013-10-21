@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require app/views/form
 //= require app/views/navigation
 //= require app/views/officers
 //= require app/views/market

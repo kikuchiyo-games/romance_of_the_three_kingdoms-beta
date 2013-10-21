@@ -12,6 +12,10 @@
   set up responsive ui with stubbed out data for most views that do not require a map
   to get a feel for possible ui/ux
 
+== NEXT UP TODOS
+  validate input on forms
+  ensure best ux in forms
+
 == BACKEND DESCRIPTION
 
 === Models

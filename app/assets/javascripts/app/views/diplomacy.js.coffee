@@ -1,5 +1,4 @@
-class window.DiplomacyView extends Backbone.View
-  el: '#view-content'
+class window.DiplomacyView extends window.FormView
 
   events:
     'click .general_assignment_form-diplomacy': 'open_general_assignment_form'
@@ -16,44 +15,15 @@ class window.DiplomacyView extends Backbone.View
     'click .implement-prison_break': 'prison_break'
 
   initialize: ->
+    _.bindAll @, ['render']
+    @view_name = 'diplomacy'
+    @view_attribute = 'charm'
+
     @fake_generals = [
       { charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
       { charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
     ]
     @
-
-  render: ->
-    $('#view-content').html(_.template($('#diplomacy-index-template').html(), {}))
-
-  open_general_assignment_form: (event)->
-    action = $(event.currentTarget).attr('data-action')
-    details = $(event.currentTarget).attr('data-details')
-
-    @open_diplomacy_container( {action:action} )
-    @open_info_dialog({action: action, details: details})
-    @list_generals('#diplomacy-general-template', action)
-
-  open_info_dialog: (options)->
-    action = options.action.split('_').join(' ')
-    window.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?")
-    if options.details?
-      $('#diplomacy_details').html(_.template($('#diplomacy-details-template').html(), {details: options.details}))
-
-  open_diplomacy_container: (options) ->
-    $('#view-content').html(_.template($('#diplomacy-container-template').html(), {button: options.action, action:"#{options.action.replace(/[aeiou]$/, '').replace( /\s/g, '_')}ing"}))
-
-  list_generals: (template, action)->
-    if action.match /patrol/
-      attribute = 'war'
-    else
-      attribute = 'charm'
-
-    for general in @fake_generals
-      $('#view-content .well').append(
-        _.template($(template).html(),
-        { general: general, attribute: { name: attribute, value: general[attribute] } }
-        )
-      )
 
   ally: ->
     value = $('#diplomacy_value').val()

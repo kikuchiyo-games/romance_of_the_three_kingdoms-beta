@@ -2,7 +2,6 @@ class window.ReportView extends Backbone.View
   el: '#view-content'
 
   initialize: (options)->
-    # _.bindAll @, ['sta']
     @
 
   events:
@@ -18,14 +17,15 @@ class window.ReportView extends Backbone.View
     $('#view-content').prepend(_.template($('#report-request-info-template').html(), {type: type, subject: options.subject, message: options.message}))
 
   request_action: (options)->
+    $('#report-index').remove()
     $('#view-content').prepend(_.template($('#report-action-required-template').html(), {type: 'danger', message: options.message}))
   
-  # DRY THIS UP!!!!
   standard_report: (options)->
+    $('#report-index').remove()
     $('#view-content').prepend(_.template($('#report-index-template').html(), {type: options.type, message: options.message}))
 
   report_details: (options)->
-    # render container
+    $('#report-details-container').remove()
     $('#view-content').prepend(_.template( $( '#report-details-container-template' ).html(), { } ) )
 
     for detail in options
@@ -36,3 +36,6 @@ class window.ReportView extends Backbone.View
 
   close: ->
     $(@el).find('.report-view').addClass('flipOutX')
+
+  invalid_input: (type, value)->
+    @report_details([{ type: 'danger', subject: 'invalid input', message: "\"#{value}\" is not an #{type}" }])
