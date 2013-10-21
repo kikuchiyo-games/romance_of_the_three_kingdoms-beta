@@ -1,6 +1,19 @@
 == A Romance of Three Kingdoms
   A game to simulate the Three Kingdoms era of China.
 
+== DEVELOPMENT SETUP
+  git clone git@github.com:kirkwood-jimenez-games/romance_of_the_three_kingdoms-beta.git
+  cd romance romance_of_the_three_kingdoms
+  bundle install
+  bundle exec rake db:create db:migrate
+  bundle exec rails s
+
+== PROGRESS
+  set up responsive ui with stubbed out data for most views that do not require a map
+  to get a feel for possible ui/ux
+
+== BACKEND DESCRIPTION
+
 === Models
   1. Provinces
     has one ruler

@@ -8,11 +8,6 @@
 @import url("maps.css.scss");
 
 body {
-  //background-color:black;
-  //background-image: url('black-marble-bg.jpeg');
-  //background-position: fixed;
-  //background-size: 100%;
-
   .center {
      float: none;
      margin-left: auto;
@@ -25,14 +20,12 @@ body {
   }
 
   background-repeat: no-repeat;
-  //background-size: 100% 200%;
   #right-sidebar {
     float:right;
   }
 
   #page {
-    //width: 753px;
-    max-width: 550px;
+    width: 1160px;
     background-image: url('paper.jpg');
     background-size: 100%;
     -webkit-box-shadow: inset 1px 1px 5px 1px rgba(1, 1, 1, 0.9);
@@ -77,21 +70,16 @@ body {
       -webkit-transform: rotate(-2deg); 
       -moz-transform: rotate(-2deg);	
       img {cursor:pointer;}
-      //td { 
-      //  background-image: none !important;
-      //  background-color: rgba(0,0,0,0);
-      //}
     }
 
     #view-content {
+      //margin-top: 200px;
       button {
         margin-bottom: 10px;
       }
       .report-view {
-        position:relative;
-        //right:0;
-        z-index: 99;
-        //background-color: white;
+        // position:relative;
+        // z-index: 99;
       }
     }
 
@@ -127,22 +115,9 @@ body {
           width: 1px;
         }
       }
-
-      tbody { font-size: 10px; }
-
-      //tfoot.closed {
-      //  background-image: url(scroll-closed-bg.png); 
-      //  tr {
-      //    height: 30px;
-      //    -webkit-transform: rotate(-2deg); 
-      //    -moz-transform: rotate(-2deg);	
-
-      //    width: 100%; 
-      //    padding: 0px !important;
-      //  }
-      //}
-      //tfoot tr { background-image: url(scroll-closed-bg.png); height: 10px; }
     }
+
+    tbody { font-size: 10px; }
 
     nav { 
       font-family: 'Star Jedi'; 
@@ -167,7 +142,7 @@ body {
   
     #province_title {
       margin-top: 5px;
-      height: 60px;
+      //height: 60px;
     }
   }
 }

@@ -10,21 +10,16 @@
 <%= render :partial => '/templates/report' %>
 
 <%= render :partial => '/shared/rotk_header' %>
-<%= render :partial => '/shared/navbar' %>
 
-<div id='page' class='container'>
-  <div class='col-xs-10 center'>
-    <%= render :partial => 'province_header' %>
-    <div class='row col-sm-12 animated slideInRight' id='details_container'>
-      <div class='col-sm-12' id='content'>
+<div class='container'>
+  <div id='page' class='table container'>
+    <div class='col-xs-3 col-md-2'>
+      <%= render :partial => '/shared/navbar' %>
+    </div>
+    <div class='col-xs-9 col-md-10'>
+      <%= render :partial => 'province_header' %>
+      <div id='details_container'>
         <%= render :partial => 'info' %>
-        <%# = render :partial => 'civil' %>
-        <%# = render :partial => 'development' %>
-        <%# = render :partial => 'diplomacy' %>
-        <%# = render :partial => 'market' %>
-        <%# = render :partial => 'military' %>
-        <%# = render :partial => 'move' %>
-        <%# = render :partial => 'personel' %>
       </div>
     </div>
   </div>

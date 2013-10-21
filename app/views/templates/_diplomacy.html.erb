@@ -2,7 +2,7 @@
   <h5>diplomacy</h5>
   <div class='col-sm-12 clear-fix'>
     <h5> open </h5>
-    <button class='btn disabled' type='button'>ally</button>
+    <button class='btn general_assignment_form-diplomacy' data-action='propose an alliance' data-details="ally with whom?" type='button'>ally</button>
     <button class='btn disabled' type='button'>threat</button>
     <button class='btn disabled' type='button'>marry</button>
     <button class='btn disabled' type='button'>gift</button>
@@ -19,3 +19,36 @@
   </div> 
 
 </script>
+
+<script type='template/javascript' id='diplomacy-details-template'>
+  <div class='media col-md-12 animated report-view form-group'>
+    <label class='form-label pull-left'>{{details}}</label>
+    <div class='col-xs-12'>
+      <input id='diplomacy_value' type='search' class='form-control' placeholder='...'/>
+    </div>
+  </div>
+</script>
+
+<script type='template/javascript' id='diplomacy-container-template'>
+  <div class='col-md-12'>
+    <div id='generals_list' class='well'>
+    </div>
+
+    <div id='diplomacy_details'>
+    </div>
+
+    <button class='btn btn-primary implement-{{action}}' type='button'>{{button}}!</button>
+  </div>
+</script>
+
+<script type='template/javascript' id='diplomacy-general-template'>
+  <div class="media col-md-12 animated report-view">
+    <a class="pull-left" href="#"> <img class="media-object" src="{{general.avatar}}" alt="..."> </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{general.name}}</h4>
+      {{attribute.name}}: {{attribute.value}}
+      <input type='checkbox'/>
+    </div>
+  </div>
+</script>
+
