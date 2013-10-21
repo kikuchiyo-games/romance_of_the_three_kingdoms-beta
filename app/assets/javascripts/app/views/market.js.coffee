@@ -27,7 +27,7 @@ class window.MarketView extends window.FormView
       window.nav_view.sub_views['report'].invalid_input('integer', value)
 
   sell_rice: ->
-    value = $('#development_value').val()
+    value = $('#market_value').val()
     if @verify_input('integer', value)
       @render()
       window.nav_view.sub_views['report'].report_details([
