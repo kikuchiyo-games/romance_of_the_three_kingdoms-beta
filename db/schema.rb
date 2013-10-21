@@ -11,7 +11,54 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021044400) do
+ActiveRecord::Schema.define(:version => 20131021185641) do
+
+  create_table "game_officers", :force => true do |t|
+    t.string   "surname"
+    t.string   "given_name"
+    t.string   "dream"
+    t.integer  "ruler_id"
+    t.integer  "game_province_id"
+    t.integer  "war"
+    t.integer  "leadership"
+    t.integer  "intelligence"
+    t.integer  "politics"
+    t.integer  "charm"
+    t.integer  "loyalty"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "game_id"
+  end
+
+  add_index "game_officers", ["game_id"], :name => "game_id_ix"
+
+  create_table "game_provinces", :force => true do |t|
+    t.string   "name"
+    t.integer  "advisor_id"
+    t.integer  "prefect_id"
+    t.integer  "ruler_id"
+    t.integer  "gold"
+    t.integer  "rice"
+    t.integer  "tax"
+    t.integer  "safety"
+    t.integer  "land"
+    t.integer  "earthquake"
+    t.integer  "fire"
+    t.integer  "flood"
+    t.integer  "commerce"
+    t.integer  "troops"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "game_id"
+  end
+
+  add_index "game_provinces", ["game_id"], :name => "game_id_ix"
+
+  create_table "games", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "officers", :force => true do |t|
     t.string   "surname"
@@ -44,6 +91,13 @@ ActiveRecord::Schema.define(:version => 20131021044400) do
     t.integer  "flood"
     t.integer  "commerce"
     t.integer  "troops"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
