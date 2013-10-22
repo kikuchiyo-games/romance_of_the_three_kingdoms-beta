@@ -26,9 +26,4 @@
 //= require app/views/civil
 //= require app/views/development
 //= require app/views/diplomacy
-
-//= require canvasengine-1.3.0.all.min
-//= require Tiled
-
-
 //= require_tree .
