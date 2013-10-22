@@ -20,11 +20,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/Downloads\/tileset\/grass-tiles-2-small.png",
+         "image":"images\/grass-tiles-2-small.png",
          "imageheight":192,
          "imagewidth":384,
          "margin":0,
-         "name":"grass-tiles-2-small",
+         "name":"tileset",
          "properties":
             {
 

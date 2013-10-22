@@ -1,4 +1,4 @@
-class window.MarketView extends window.FormView
+class App.MarketView extends App.FormView
   events:
     'click .general_assignment_form-market': 'open_general_assignment_form'
     'click .implement-buy_ricing': 'buy_rice'
@@ -19,20 +19,20 @@ class window.MarketView extends window.FormView
     value = $('#market_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
         { type: 'success', subject: 'rice reserves increased!', message: "rice reserves have increased by 5%" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   sell_rice: ->
     value = $('#market_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'warning', subject: 'rice reserves decreased!', message: "rice reserves have decreased by #{value}" },
         { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by 500" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)

@@ -6,8 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-default_game = Game.create
 default_user = User.create
+default_user.name = 'default_user'
+default_game = Game.create
+default_user.game = default_game
+default_user.save!
+
 default_province = GameProvince.new
 default_province.name = 'hei fei'
 default_province.save!

@@ -1,4 +1,4 @@
-class window.NavigationView extends Backbone.View
+class App.NavigationView extends Backbone.View
 
   el: '#navigation_view'
 

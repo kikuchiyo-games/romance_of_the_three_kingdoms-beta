@@ -1,4 +1,4 @@
-class window.DiplomacyView extends window.FormView
+class App.DiplomacyView extends App.FormView
 
   events:
     'click .general_assignment_form-diplomacy': 'open_general_assignment_form'
@@ -28,7 +28,7 @@ class window.DiplomacyView extends window.FormView
   ally: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
     ])
@@ -36,7 +36,7 @@ class window.DiplomacyView extends window.FormView
   joint: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
     ])
@@ -44,7 +44,7 @@ class window.DiplomacyView extends window.FormView
   threat: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
     ])
@@ -52,7 +52,7 @@ class window.DiplomacyView extends window.FormView
   marry: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
     ])
@@ -60,7 +60,7 @@ class window.DiplomacyView extends window.FormView
   gift: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
     ])
@@ -68,7 +68,7 @@ class window.DiplomacyView extends window.FormView
   mediate: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
     ])
@@ -76,7 +76,7 @@ class window.DiplomacyView extends window.FormView
   investigate: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
     ])
@@ -84,7 +84,7 @@ class window.DiplomacyView extends window.FormView
   assassinate: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
     ])
@@ -92,7 +92,7 @@ class window.DiplomacyView extends window.FormView
   kidnap: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
       { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
     ])
@@ -100,7 +100,7 @@ class window.DiplomacyView extends window.FormView
   request_prisoner_release: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
       { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
     ])
@@ -108,7 +108,7 @@ class window.DiplomacyView extends window.FormView
   prison_break: ->
     value = $('#diplomacy_value').val()
     @render()
-    window.nav_view.sub_views['report'].report_details([
+    App.nav_view.sub_views['report'].report_details([
       { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
       { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
     ])

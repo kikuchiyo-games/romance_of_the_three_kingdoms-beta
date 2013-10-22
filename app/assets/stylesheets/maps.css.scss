@@ -11,3 +11,15 @@
 #map-canvas {
   height: 320px;
 }
+
+#game_container {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+
+  max-width: 960px;
+
+  #game_map {
+    border: solid 1px gray;
+  }
+}

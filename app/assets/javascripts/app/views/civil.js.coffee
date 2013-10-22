@@ -1,4 +1,4 @@
-class window.CivilView extends window.FormView
+class App.CivilView extends App.FormView
   events:
     'click .general_assignment_form-civil': 'open_general_assignment_form'
     'click .implement-give_rice_to_the_peopling': 'give_rice'
@@ -23,36 +23,36 @@ class window.CivilView extends window.FormView
     value = $('#civil_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
         { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   give_gold: ->
     value = $('#civil_value').val()
     @generals()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
         { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   tax: ->
     value = $('#civil_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
         { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   patrol: ->
     @render()
-    window.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'patroling for the people was successful!', message: "public safety has increased by 10%")
+    App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'patroling for the people was successful!', message: "public safety has increased by 10%")

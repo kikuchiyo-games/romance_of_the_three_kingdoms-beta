@@ -1,4 +1,4 @@
-class window.FormView extends Backbone.View
+class App.FormView extends Backbone.View
   el: '#view-content'
 
   verify_input: (type, value) ->
@@ -30,7 +30,7 @@ class window.FormView extends Backbone.View
 
   open_info_dialog: (options)->
     action = options.action.split('_').join(' ')
-    window.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?")
+    App.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?")
     if options.details?
       $("##{@view_name}_details").html(_.template($("##{@view_name}-details-template").html(), {details: options.details}))
 

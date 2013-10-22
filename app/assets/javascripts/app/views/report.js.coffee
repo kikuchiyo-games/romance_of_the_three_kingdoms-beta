@@ -1,4 +1,4 @@
-class window.ReportView extends Backbone.View
+class App.ReportView extends Backbone.View
   el: '#view-content'
 
   initialize: (options)->

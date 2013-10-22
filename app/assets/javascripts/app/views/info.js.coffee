@@ -1,4 +1,4 @@
-class window.InfoView extends window.FormView
+class App.InfoView extends App.FormView
   el: 'body'
 
   events:

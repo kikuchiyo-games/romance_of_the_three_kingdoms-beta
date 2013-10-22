@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require app
 //= require app/views/form
 //= require app/views/navigation
 //= require app/views/officers
@@ -25,4 +26,9 @@
 //= require app/views/civil
 //= require app/views/development
 //= require app/views/diplomacy
+
+//= require canvasengine-1.3.0.all.min
+//= require Tiled
+
+
 //= require_tree .

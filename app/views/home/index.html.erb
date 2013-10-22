@@ -24,4 +24,7 @@
     </div>
   </div>
 </div>
-<%#= render :partial => 'right_nav' %>
+
+<%if params['map'] == 'true' %>
+  <%= render :partial => 'map' %>
+<%end%>

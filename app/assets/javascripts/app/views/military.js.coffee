@@ -1,4 +1,4 @@
-class window.MilitaryView extends window.FormView
+class App.MilitaryView extends App.FormView
 
   events:
     'click .general_assignment_form': 'open_general_assignment_form'
@@ -21,43 +21,43 @@ class window.MilitaryView extends window.FormView
 
   train_troops: ->
     @render()
-    window.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop training successful!', message: "troop readiness has increased by 3%")
+    App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop training successful!', message: "troop readiness has increased by 3%")
 
   conscript_troops: ->
     value = $('#military_value').val()
 
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop conscripting successful!', message: "troop count has increased by #{value}")
+      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop conscripting successful!', message: "troop count has increased by #{value}")
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   equip_troops: ->
     value = $('#military_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop equiping successful!', message: "troop arms have increased by #{value}")
+      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop equiping successful!', message: "troop arms have increased by #{value}")
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
    draft_troops: ->
     value = $('#military_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'danger', subject: 'the peoples loyalty decreased!', message: 'the people have lost trust in you.  loyalty has decreased by 10%!' },
         { type: 'success', subject: 'troop drafting successful!', message: "troop count has increased by #{value}" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
    release_troops: ->
     value = $('#military_value').val()
     if @verify_input('integer', value)
       @render()
-      window.nav_view.sub_views['report'].report_details([
+      App.nav_view.sub_views['report'].report_details([
         { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
         { type: 'warning', subject: 'troop releasing successful!', message: "troop count has decreased by #{value}" }
       ])
     else
-      window.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
