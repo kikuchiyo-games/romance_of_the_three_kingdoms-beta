@@ -28,87 +28,55 @@ class App.DiplomacyView extends App.FormView
   ally: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   joint: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   threat: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   marry: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   gift: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   mediate: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   investigate: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   assassinate: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   kidnap: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-      { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   request_prisoner_release: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
-      { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   prison_break: ->
     value = $('#diplomacy_value').val()
     @render()
-    App.nav_view.sub_views['report'].report_details([
-      { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
-      { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
-    ])
+    # App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
+

@@ -20,55 +20,30 @@ class App.DevelopmentView extends App.FormView
 
   land_invest: ->
     value = $('#development_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'land quality has increased!', message: "land quality has increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'land quality', decreased_by: value, increased_by: '5%')
 
   commerce_invest: ->
     value = $('#development_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'commerce has increased!', message: "commerce has increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'commerce', decreased_by: value, increased_by: '5%')
 
   flood_protection: ->
     value = $('#development_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'flood control has increased!', message: "flood control increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'flood control', decreased_by: value, increased_by: '5%')
 
   fire_protection: ->
     value = $('#development_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'fire control has increased!', message: "fire control increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'fire control', decreased_by: value, increased_by: '5%')
 
   earthquake_protection: ->
     value = $('#development_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'earthquake control has increased!', message: "earthquake control increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'earthquake control', decreased_by: value, increased_by: '5%')

@@ -17,22 +17,12 @@ class App.MarketView extends App.FormView
 
   buy_rice: ->
     value = $('#market_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" },
-        { type: 'success', subject: 'rice reserves increased!', message: "rice reserves have increased by 5%" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'rice reserves', decreased_by: value, increased_by: '5%')
 
   sell_rice: ->
     value = $('#market_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'warning', subject: 'rice reserves decreased!', message: "rice reserves have decreased by #{value}" },
-        { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by 500" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'gold reserves', decreased_by: value, increased_by: '5%')

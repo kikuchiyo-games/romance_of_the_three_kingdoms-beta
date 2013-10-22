@@ -21,38 +21,27 @@ class App.CivilView extends App.FormView
 
   give_rice: ->
     value = $('#civil_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-        { type: 'warning', subject: 'rice reserves decreased!', message: "rice has decreased by #{value}" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   give_gold: ->
     value = $('#civil_value').val()
-    @generals()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-        { type: 'warning', subject: 'gold reserves decreased!', message: "gold has decreased by #{value}" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
 
   tax: ->
     value = $('#civil_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'success', subject: 'gold reserves increased!', message: "gold has increased by #{value}" },
-        { type: 'warning', subject: 'the peoples loyalty decreased!', message: "the people have lost trust in you.  loyalty has decreased by 10%!" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(increase: 'gold reserves', decrease: 'the people\'s loyalty', decreased_by: '10%', increased_by: @taxed_amount(value))
 
   patrol: ->
     @render()
     App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'patroling for the people was successful!', message: "public safety has increased by 10%")
+
+  taxed_amount: (tax_rate) ->
+    # temporary population setting
+    population = 10000
+    return population * ( tax_rate / 100 )

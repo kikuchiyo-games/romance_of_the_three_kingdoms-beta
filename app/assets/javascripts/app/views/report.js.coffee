@@ -39,3 +39,13 @@ class App.ReportView extends Backbone.View
 
   invalid_input: (type, value)->
     @report_details([{ type: 'danger', subject: 'invalid input', message: "\"#{value}\" is not an #{type}" }])
+
+  no_general_selected: ->
+    @report_details([{ type: 'danger', subject: 'invalid input', message: "select one or more generals to carry out the task" }])
+
+  report_resource_details: (options) ->
+    @report_details([
+      { type: 'warning', subject: "#{options.decrease} decreased!", message: "#{options.decrease} decreased by #{options.decreased_by}" },
+      { type: 'success', subject: "#{options.increase} increased!", message: "#{options.increase} increased by #{options.increased_by}" }
+    ])
+

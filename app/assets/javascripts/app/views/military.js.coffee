@@ -25,39 +25,24 @@ class App.MilitaryView extends App.FormView
 
   conscript_troops: ->
     value = $('#military_value').val()
-
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
       App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop conscripting successful!', message: "troop count has increased by #{value}")
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
   equip_troops: ->
     value = $('#military_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
       App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop equiping successful!', message: "troop arms have increased by #{value}")
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
 
    draft_troops: ->
     value = $('#military_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'danger', subject: 'the peoples loyalty decreased!', message: 'the people have lost trust in you.  loyalty has decreased by 10%!' },
-        { type: 'success', subject: 'troop drafting successful!', message: "troop count has increased by #{value}" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'the people\'s loyalty', increase: 'troop count', increased_by: value, decreased_by: '5%')
 
    release_troops: ->
     value = $('#military_value').val()
-    if @verify_input('integer', value)
+    if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_details([
-        { type: 'success', subject: 'the peoples loyalty increased!', message: 'the people have gained trust in you.  loyalty has increased by 10%!' },
-        { type: 'warning', subject: 'troop releasing successful!', message: "troop count has decreased by #{value}" }
-      ])
-    else
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].report_resource_details(increase: 'the people\'s loyalty', decrease: 'troop count', decreased_by: value, increased_by: '5%')

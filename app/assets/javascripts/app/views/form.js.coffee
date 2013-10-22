@@ -6,6 +6,23 @@ class App.FormView extends Backbone.View
       return value.match(/^\d+$/)
     return false
 
+  verify_form: (type, value) ->
+    if !@verify_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value)
+    else if !@general_is_selected()
+      App.nav_view.sub_views['report'].no_general_selected()
+    else
+      return true
+
+    return false
+
+  generals: ->
+    $('#view-content input:checked').each ->
+      console.log($(this).attr('data-value'))
+
+  general_is_selected: (type, value) ->
+    return $('#view-content input:checked').length != 0
+
   list_generals_actions: (template, action, attribute)->
     if !attribute.match /intelligence|charm|war|politics/
       if action.match /patrol/
@@ -52,6 +69,4 @@ class App.FormView extends Backbone.View
   render: ->
     $('#view-content').html(_.template($("##{@view_name}-index-template").html(), {}))
 
-  generals: ->
-    $('#view-content input:checked').each ->
-      console.log($(this).attr('data-value'))
+
