@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that'll be compiled into application
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -26,4 +26,37 @@
 //= require app/views/civil
 //= require app/views/development
 //= require app/views/diplomacy
+
+// EaselJS
+//= require preloadjs-NEXT.min
+//= require soundjs-NEXT.min
+//= require_tree ./createjs
+
+//= require createjs/utils/IndexOf
+//= require easeljs/utils/UID
+//= require easeljs/utils/Ticker
+//= require easeljs/geom/Matrix2D
+//= require easeljs/geom/Point
+//= require easeljs/geom/Rectangle
+//= require easeljs/display/Shadow
+//= require easeljs/display/SpriteSheet
+//= require easeljs/display/Graphics
+//= require easeljs/display/DisplayObject
+//= require easeljs/display/Container
+//= require easeljs/display/Stage
+//= require easeljs/display/Bitmap
+//= require easeljs/display/Sprite
+//= require easeljs/display/BitmapAnimation
+//= require easeljs/display/BitmapText
+//= require easeljs/display/Shape
+//= require easeljs/display/Text
+//= require easeljs/display/DOMElement
+//= require easeljs/events/MouseEvent
+//= require easeljs/filters/Filter
+//= require easeljs/ui/ButtonHelper
+//= require easeljs/ui/Touch
+//= require easeljs/utils/SpriteSheetUtils
+//= require easeljs/utils/SpriteSheetBuilder
+//= require map_loader
+//= require easeljs_canvas_practice.js
 //= require_tree .
