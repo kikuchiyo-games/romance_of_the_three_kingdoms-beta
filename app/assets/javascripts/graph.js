@@ -16,7 +16,11 @@ App.Graph = function(stage){
       this.stage = stage;
     },
     add_movement_button: function(button, desired_x, desired_y){
-      App.movement_buttons.push( stage.addChild(new MovementButton(' ', '#00F')))
+      var color;
+      if(App.battlefield.enemy_unit.x == desired_x && App.battlefield.enemy_unit.y == desired_y){
+        color = '#FF0000'; 
+      } else {color = 'black';}
+      App.movement_buttons.push( stage.addChild(new MovementButton(' ', color)))
       App.movement_buttons[App.movement_buttons.length - 1].x = desired_x;
       App.movement_buttons[App.movement_buttons.length - 1].y = desired_y;
       App.movement_buttons[App.movement_buttons.length - 1].path_id = App.movement_buttons.length - 1;

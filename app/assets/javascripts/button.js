@@ -14,10 +14,10 @@
 
   p.initialize = function(label, color) {
     this.Container_initialize();
-    
+
     this.label = label;
     if (!color) { color = "#CCC"; }
-    
+    this.color = color;
     var text = new createjs.Text(label, "20px Arial", "#000");
     text.textBaseline = "top";
     text.textAlign = "center";
@@ -41,10 +41,18 @@
     this.addChild(this.background,text); 
     this.addEventListener("click", this.handleClick);  
     this.addEventListener("tick", this.handleTick);
+    this.cursor = 'pointer';
+
   } 
 
   p.handleClick = function (event) {    
     var target = event.target.parent;
+
+    if(target.color == '#FF0000'){
+      App.battlefield.open_attack_menu(App.battlefield.enemy_unit);
+      return;
+    }
+
     var ally_unit = App.battlefield.ally_unit;
     var battlefield = App.battlefield;
     var graph = battlefield.graph;
