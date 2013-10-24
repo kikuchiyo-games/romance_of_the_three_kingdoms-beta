@@ -1,10 +1,13 @@
 // loading layers
-function initLayers(stage) {
+function initLayers(battlefield) {
   // compose EaselJS tileset from image (fixed 64x64 now, but can be parametized)
+
+  var mapData = battlefield.mapData;
+  var stage = battlefield.stage;
   var w = mapData.tilesets[0].tilewidth;
   var h = mapData.tilesets[0].tileheight;
   var imageData = {
-    images : [ tileset ],
+    images : [ battlefield.tileset ],
     frames : {
       width : w,
       height : h
@@ -17,7 +20,7 @@ function initLayers(stage) {
   for (var idx = 0; idx < mapData.layers.length; idx++) {
     var layerData = mapData.layers[idx];
     if (layerData.type == 'tilelayer')
-      initLayer(layerData, App.tilesetSheet, mapData.tilewidth, mapData.tileheight);
+      initLayer(layerData, App.tilesetSheet, mapData.tilewidth, mapData.tileheight, stage);
   }
   // stage updates (not really used here)
   createjs.Ticker.setFPS(20);
@@ -25,7 +28,7 @@ function initLayers(stage) {
 }
 
 // layer initialization
-function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
+function initLayer(layerData, tilesetSheet, tilewidth, tileheight, stage) {
   App.mountains = [];
   App.plains = [];
   App.forests = [];

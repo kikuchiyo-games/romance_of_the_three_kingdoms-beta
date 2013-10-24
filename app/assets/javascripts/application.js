@@ -57,6 +57,11 @@
 //= require easeljs/ui/Touch
 //= require easeljs/utils/SpriteSheetUtils
 //= require easeljs/utils/SpriteSheetBuilder
+//= require tweenjs/Tween
+//= require tweenjs/Ease
+
 //= require map_loader
+//= require graph
+//= require button
 //= require easeljs_canvas_practice.js
 //= require_tree .
