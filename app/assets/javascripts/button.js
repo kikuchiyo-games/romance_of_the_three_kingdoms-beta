@@ -56,6 +56,10 @@
         if(button.path_id == destination_set[0]){ destination = button; }
       });
 
+      if(destination.x < ally_unit.x){ 
+        ally_unit.gotoAndPlay('left'); 
+      } else if(target.x > ally_unit.x){  ally_unit.gotoAndPlay('right'); }
+
       createjs.Tween.get(ally_unit).to({
          x: destination.x, 
          y: destination.y
@@ -65,6 +69,17 @@
       ).call(function(){
         destination_set.shift();
         if (destination_set.length > 0){
+          var destination;
+          _.each( App.movement_buttons, function(button){
+            if(button.path_id == destination_set[0]){ destination = button; }
+          });
+
+          if( ally_unit.x <  destination.x){
+            ally_unit.gotoAndPlay('right');
+          } else if( ally_unit.x >  destination.x){
+            ally_unit.gotoAndPlay('left');
+          }
+
           tween_to(destination_set);
         } else {
           _.each( App.movement_buttons, function(button){ battlefield.stage.removeChild(button); });
