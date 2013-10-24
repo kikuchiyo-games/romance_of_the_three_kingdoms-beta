@@ -73,7 +73,7 @@
       });
     }
 
-    _.each( App.movement_buttons, function(button){button.removeAllEventListeners();});
+    _.each( App.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
     var destination = App.movement_buttons[App.movement_buttons.indexOf(App.movement_buttons[target.path_id])];
     tween_to(target.path_to_origin);
   } 
