@@ -17,7 +17,7 @@ App.Unit = function(options){
     this.force = options.force;
     this.unit_id = options.unit_id;
     this.battlefield = battlefield;    
-    this.el = battlefield.stage.addChild(new createjs.Sprite(self.spriteSheet, 'left'));
+    this.el = battlefield.stage.addChild(new createjs.Sprite(self.spriteSheet, options.direction));
     this.el.x = position.x;
     this.el.y = position.y;
 
@@ -41,9 +41,9 @@ App.Unit = function(options){
     console.log(this.given_name + ' is dead!')
 
     if(this.force == 'attacking'){ 
-      force = App.battlefield.attackers; 
+      force = this.battlefield.attackers; 
     } else if (this.force == 'defending'){ 
-      force = App.battlefield.defenders; 
+      force = this.battlefield.defenders; 
     }
 
     _.each( force, function(force_unit, i){
@@ -58,6 +58,8 @@ App.Unit = function(options){
     this.battlefield.stage.removeChild(this.el);
     if( unit.is_playable ){
       this.battlefield.graph.create_movement_tiles(unit.el, [32, 64, 96, 128]);
+    } else {
+      this.battlefield.update_active_unit();
     }
     delete(this);
   }
@@ -91,13 +93,15 @@ App.Unit = function(options){
       first_tile = this.battlefield.find_tile_by_path_id(tile.path_to_origin[0]);
     if( first_tile != undefined ){
       this.tween_path(first_tile, tile.path_to_origin);
+    } else {
+      this.battlefield.update_active_unit();
     }
 
     this.give_damage(victim);
-    if( victim.check_status(this) == 'alive'){
-      victim.give_damage(this);
-      this.check_status(victim);
-    }
+    victim.check_status(this);
+    victim.give_damage(this);
+    this.check_status(victim);
+    this.battlefield_detect_game_over();
   };
 
   this.move = function(tile){
@@ -154,10 +158,9 @@ App.Unit = function(options){
         var new_tile = App.battlefield.find_tile_by_path_id(destination_set[0]);
         self.set_direction(new_tile);
         self.tween_path(new_tile, destination_set);
-
       } else {
         self.battlefield.remove_movement_buttons();
-        self.battlefield.graph.create_movement_tiles(self.el, [32, 64, 96, 128]);
+        self.battlefield.update_active_unit();
       }
     });
   }

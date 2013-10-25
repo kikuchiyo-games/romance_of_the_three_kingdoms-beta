@@ -4,6 +4,7 @@ function Battlefield() {
   return({
     initialize: function(){
       var self = this;
+      this.game_over = false;
       this.stage = new createjs.Stage("game_map"),
       this.mapData =  mapDataJson,
       this.tileset = new Image();
@@ -12,6 +13,7 @@ function Battlefield() {
 
       this.attackers = [ 
         new App.Unit({
+          direction: 'right',
           is_playable: false,
           force: 'attacking',
           unit_id: 0,
@@ -34,6 +36,7 @@ function Battlefield() {
 
       this.defenders = [ 
         new App.Unit({
+          direction: 'left',
           is_playable: true,
           force: 'defending',
           unit_id: 0,
@@ -51,6 +54,27 @@ function Battlefield() {
             leadership: 95,
             troop_count: 100
           }
+        }),
+
+        new App.Unit({
+          direction: 'left',
+          is_playable: true,
+          force: 'defending',
+          unit_id: 0,
+          battlefield: self,
+          position: {
+            x: 704, 
+            y: 192
+          },
+          general: {
+            surname: 'xun',
+            given_name: 'yu',
+            loyalty: 100,
+            war: 50,
+            intelligence: 95,
+            leadership: 90,
+            troop_count: 100
+          }
         })
       ]
 
@@ -64,6 +88,64 @@ function Battlefield() {
       this.stage.enableMouseOver(200);
 
     }, 
+
+    announce_victory: function(){
+      console.log('victory');
+      $('#game_map').hide();
+      $('#attack_menu').css('visibility', 'hidden');
+      this.stage.removeAllChildren();
+      delete this;
+      alert('victory!');
+    },
+
+    announce_defeat: function(){
+      console.log('defeat');
+      $('#game_map').hide();
+      $('#attack_menu').css('visibility', 'hidden');
+      this.stage.removeAllChildren();
+      delete this;
+      alert('defeat!');
+    },
+
+
+    detect_game_over: function(){
+      if(this.attackers.length == 0){
+        this.announce_victory();
+        this.game_over = true
+        return true;
+      } else if (this.defenders.length == 0){
+        this.announce_defeat();
+        this.game_over = true
+        return true;
+      }
+      console.log('game still in progress!');
+      return false;
+    },
+
+    update_active_unit: function(){
+      if (!this.game_over && !this.detect_game_over()){
+        this.active_unit = this.next_force_unit();
+        this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128])
+      }
+    },
+
+    next_force_unit: function(){
+      var self = this, force_unit, force, index, next_force_index, unit = this.active_unit;
+
+      if(unit.force == 'defending'){
+        force = this.defenders; 
+      } else { force = this.attackers; }
+
+      index = force.indexOf(unit);
+      console.log('index = ' + index);
+      if(index == force.length - 1){
+        next_force_index = 0;
+      } else {
+        next_force_index = index + 1;
+      }
+      console.log('next_force_index = ' + next_force_index);
+      return(force[next_force_index]);
+    },
 
     find_tile_by_path_id: function(path_id){
       var self = this, tile;
