@@ -66,13 +66,12 @@ App.Unit = function(options){
     var attack_strength, defense_strength, damage;
 
     attack_strength = ((this.war/100) * this.troop_count) * Math.random(1);
-    defense_strength = ((unit.war/100) * unit.troop_count) * Math.random(1) / 2; //* 7 / 8;
+    defense_strength = ((unit.war/100) * unit.troop_count) * Math.random(1) * 7 / 8;
 
     console.log(this.given_name + ' attack_strength ' +  attack_strength);
     console.log(unit.given_name + ' defense_strength ' + defense_strength);
 
-    damage = Math.max(10, attack_strength - defense_strength);
-    if(unit.given_name == 'fei'){damage = 0;}
+    damage = Math.max(0, attack_strength - defense_strength);
 
     unit.troop_count -= damage;
     unit.reposition_troop_count_report();
