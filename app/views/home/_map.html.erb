@@ -11,14 +11,12 @@
       </div>
     </div>
     <br />
-    <button id="btn" width="100" type='button' class='btn' onclick="alert('charge')">charge</button>
-    <button id="btn" width="100" type='button' class='btn' onclick="alert('normal')">normal</button>
-    <button id="btn" width="100" type='button' class='btn' onclick="alert('dual')">dual</button>
-    <button id="btn" width="100" type='button' class='btn' onclick="alert('bribe')">bribe</button>
-    <button id="btn" width="100" type='button' class='btn btn-danger' onclick="App.battlefield.close_attack_menu()">x</button>
+    <button data-action='charge' width="100" type='button' class='btn'>charge</button>
+    <button data-action='assault' width="100" type='button' class='btn'>normal</button>
+    <button data-action='dual' width="100" type='button' class='btn'>dual</button>
+    <button data-action='bribe' width="100" type='button' class='btn'>bribe</button>
+    <button width="100" type='button' class='btn btn-danger' onclick="App.battlefield.close_attack_menu()">x</button>
   </div>
-
   <canvas id='game_map' width='800px' height='672px'>
   </canvas>
 </div>
-<%#=javascript_include_tag 'easeljs_canvas_practice'%>

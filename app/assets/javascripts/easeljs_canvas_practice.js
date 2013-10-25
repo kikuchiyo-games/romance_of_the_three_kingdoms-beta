@@ -20,9 +20,11 @@ function Battlefield() {
       this.ally_unit = this.stage.addChild(new createjs.Sprite(self.spriteSheet, "left"));
       this.ally_unit.x = 448;
       this.ally_unit.y = 224;
+      this.ally_unit.troop_count = 11;
       this.enemy_unit = this.stage.addChild(new createjs.Sprite(self.spriteSheet, "right"));
       this.enemy_unit.x = 384;
       this.enemy_unit.y = 160;
+      this.enemy_unit.troop_count = 10;
 
       this.enemy_unit.surname = 'zhang';
       this.enemy_unit.given_name = 'fei';
@@ -30,9 +32,12 @@ function Battlefield() {
       this.enemy_unit.loyalty = '100%';
       this.enemy_unit.leadership = '90%';
       this.enemy_unit.intelligence = '30%';
+
       App.movement_buttons = [];
+
       this.graph = new App.Graph(this.stage);
       this.graph.create_movement_tiles(this.ally_unit, [32, 64, 96, 128]);
+
       createjs.Ticker.addEventListener("tick", this.stage);
 
       canvas = document.getElementById('game_controller')
@@ -54,6 +59,10 @@ function Battlefield() {
       $('#attack_menu .battlefield-officer-loyalty').html( enemy_unit.loyalty );
       $('#attack_menu .battlefield-officer-intelligence').html( enemy_unit.intelligence );
       $('#attack_menu .battlefield-officer-leadership').html( enemy_unit.intelligence );
+      var destination;
+      _.each( App.movement_buttons, function(button){ if(button.x == enemy_unit.x && button.y == enemy_unit.y){ destination = button; } });
+
+      $('#attack_menu [data-action="charge"]').attr('path_id', destination.path_id);
 
       if(this.container != undefined){
         this.content.visible = true;
@@ -72,6 +81,16 @@ function Battlefield() {
       this.container.y = App.battlefield.enemy_unit.y;
 
       this.container.alpha = 0.8;
+    },
+    charge: function(event){
+      alert($(event.currentTarget));
+    },
+
+    assault: function(event){
+    },
+    dual: function(event){
+    },
+    bribe: function(event){
     }
   })
 }

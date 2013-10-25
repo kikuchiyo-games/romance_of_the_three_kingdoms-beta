@@ -26,6 +26,7 @@
 //= require app/views/civil
 //= require app/views/development
 //= require app/views/diplomacy
+//= require app/views/attack_menu
 
 // EaselJS
 //= require preloadjs-NEXT.min

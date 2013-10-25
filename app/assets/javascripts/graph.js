@@ -17,7 +17,7 @@ App.Graph = function(stage){
     },
     add_movement_button: function(button, desired_x, desired_y){
       var color;
-      if(App.battlefield.enemy_unit.x == desired_x && App.battlefield.enemy_unit.y == desired_y){
+      if(App.battlefield.enemy_unit != null && App.battlefield.enemy_unit.x == desired_x && App.battlefield.enemy_unit.y == desired_y){
         color = '#FF0000'; 
       } else {color = 'black';}
       App.movement_buttons.push( stage.addChild(new MovementButton(' ', color)))

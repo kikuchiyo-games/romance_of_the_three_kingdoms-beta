@@ -42,8 +42,25 @@
     this.addEventListener("click", this.handleClick);  
     this.addEventListener("tick", this.handleTick);
     this.cursor = 'pointer';
-
   } 
+
+  p.attack = function () {
+    this.path_to_origin.pop();
+    tween_to(App.battlefield.ally_unit, this.path_to_origin);
+    App.battlefield.close_attack_menu();
+    App.battlefield.enemy_unit.troop_count -= 10;
+    App.battlefield.ally_unit.troop_count -= 10;
+
+    if(App.battlefield.enemy_unit.troop_count <= 0){
+      App.battlefield.stage.removeChild(App.battlefield.enemy_unit)
+      App.battlefield.enemy_unit = null
+    }
+
+    if(App.battlefield.ally_unit.troop_count <= 0){
+      App.battlefield.stage.removeChild(App.battlefield.ally_unit);
+    }
+
+  }
 
   p.handleClick = function (event) {    
     var target = event.target.parent;
@@ -54,53 +71,46 @@
     }
 
     var ally_unit = App.battlefield.ally_unit;
-    var battlefield = App.battlefield;
-    var graph = battlefield.graph;
+
     if(target.x < ally_unit.x){ ally_unit.gotoAndPlay('left'); } else if(target.x > ally_unit.x){ ally_unit.gotoAndPlay('right'); }
 
-    function tween_to(destination_set){
-      var destination; 
-      _.each( App.movement_buttons, function(button){
-        if(button.path_id == destination_set[0]){ destination = button; }
-      });
-
-      if(destination.x < ally_unit.x){ 
-        ally_unit.gotoAndPlay('left'); 
-      } else if(target.x > ally_unit.x){  ally_unit.gotoAndPlay('right'); }
-
-      createjs.Tween.get(ally_unit).to({
-         x: destination.x, 
-         y: destination.y
-       }, 
-       500, 
-       createjs.Ease.linear
-      ).call(function(){
-        destination_set.shift();
-        if (destination_set.length > 0){
-          var destination;
-          _.each( App.movement_buttons, function(button){
-            if(button.path_id == destination_set[0]){ destination = button; }
-          });
-
-          if( ally_unit.x <  destination.x){
-            ally_unit.gotoAndPlay('right');
-          } else if( ally_unit.x >  destination.x){
-            ally_unit.gotoAndPlay('left');
-          }
-
-          tween_to(destination_set);
-        } else {
-          _.each( App.movement_buttons, function(button){ battlefield.stage.removeChild(button); });
-          graph.create_movement_tiles(ally_unit, [32, 64, 96, 128]);
-        }
-      });
-    }
-
     _.each( App.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
-    var destination = App.movement_buttons[App.movement_buttons.indexOf(App.movement_buttons[target.path_id])];
-    tween_to(target.path_to_origin);
+
+    tween_to(ally_unit, target.path_to_origin);
   } 
-  
-  p.handleTick = function(event) { p.alpha = 0.3; /*Math.min(Math.cos(p.count++*0.5)*0.4+0.8, 0.6);*/ }
+
+  function tween_to(unit, destination_set){
+    var battlefield = App.battlefield;
+    var graph = battlefield.graph;
+    var destination; 
+    _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
+
+    if ( destination == undefined ){ return; }
+
+    if(destination.x < unit.x){
+      unit.gotoAndPlay('left'); 
+    } else if(destination.x > unit.x){  unit.gotoAndPlay('right'); }
+
+    createjs.Tween.get(unit).to({ x: destination.x, y: destination.y }, 100, createjs.Ease.linear ).call(function(){
+      var destination;
+      destination_set.shift();
+
+      if (destination_set.length > 0){
+        _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
+
+        if( unit.x <  destination.x){ 
+          unit.gotoAndPlay('right'); 
+        } else if( unit.x >  destination.x){ unit.gotoAndPlay('left'); }
+
+        tween_to(unit, destination_set);
+
+      } else {
+        _.each( App.movement_buttons, function(button){ battlefield.stage.removeChild(button); });
+        graph.create_movement_tiles(unit, [32, 64, 96, 128]);
+      }
+    });
+  } 
+
+  p.handleTick = function(event) { p.alpha = 0.4; }
   window.MovementButton = Button;
 }());
