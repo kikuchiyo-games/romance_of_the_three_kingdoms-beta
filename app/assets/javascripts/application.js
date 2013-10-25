@@ -64,5 +64,5 @@
 //= require map_loader
 //= require graph
 //= require button
-//= require easeljs_canvas_practice.js
+//= require battlefield.js
 //= require_tree .

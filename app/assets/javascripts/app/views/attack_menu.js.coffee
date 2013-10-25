@@ -7,6 +7,7 @@ class App.AttackMenu extends Backbone.View
     'click [data-action="bribe"]': 'bribe'
 
   initialize: ->
+    @battlefield = App.battlefield
     @
 
   dual: (event)->
@@ -20,7 +21,7 @@ class App.AttackMenu extends Backbone.View
 
     self = @
 
-    _.each( App.movement_buttons, ((button) ->
+    _.each( self.battlefield.movement_buttons, ((button) ->
       console.log button.path_id
       if button.path_id == path_id
         self.destination = button
