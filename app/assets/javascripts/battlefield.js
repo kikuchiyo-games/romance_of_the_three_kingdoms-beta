@@ -12,6 +12,9 @@ function Battlefield() {
 
       this.attackers = [ 
         new App.Unit({
+          is_playable: false,
+          force: 'attacking',
+          unit_id: 0,
           battlefield: self,
           position: {
             x: 352, 
@@ -31,6 +34,9 @@ function Battlefield() {
 
       this.defenders = [ 
         new App.Unit({
+          is_playable: true,
+          force: 'defending',
+          unit_id: 0,
           battlefield: self,
           position: {
             x: 448, 
@@ -48,28 +54,11 @@ function Battlefield() {
         })
       ]
 
-      //this.ally_unit = new App.Unit()
-      //this.stage.addChild(new createjs.Sprite(self.spriteSheet, "left"));
-      //this.ally_unit.x = 448;
-      //this.ally_unit.y = 224;
-      //this.ally_unit.troop_count = 11;
-
-      //this.enemy_unit = this.stage.addChild(new createjs.Sprite(self.spriteSheet, "right"));
-      //this.enemy_unit.x = 384;
-      //this.enemy_unit.y = 160;
-      //this.enemy_unit.troop_count = 10;
-
-      //this.enemy_unit.surname = 'zhang';
-      //this.enemy_unit.given_name = 'fei';
-      //this.enemy_unit.war = '91%';
-      //this.enemy_unit.loyalty = '100%';
-      //this.enemy_unit.leadership = '90%';
-      //this.enemy_unit.intelligence = '30%';
-
       this.movement_buttons = [];
       this.active_unit = this.defenders[0]
       this.graph = new App.Graph({battlefield: this});
       this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128]);
+      //this.graph.create_map_tiles(this.active_unit.el)
 
       createjs.Ticker.addEventListener("tick", this.stage);
       this.stage.enableMouseOver(200);
@@ -129,6 +118,7 @@ function Battlefield() {
       $('#attack_menu .battlefield-officer-loyalty').html( unit.loyalty );
       $('#attack_menu .battlefield-officer-intelligence').html( unit.intelligence );
       $('#attack_menu .battlefield-officer-leadership').html( unit.leadership );
+      $('#attack_menu .battlefield-officer-troops').html( Math.round(unit.troop_count) );
       var destination, self = this;
       _.each( self.movement_buttons, function(button){ if(button.x == unit.el.x && button.y == unit.el.y){ destination = button; } });
 
@@ -168,6 +158,7 @@ function Battlefield() {
 function init(){ 
   App.battlefield = new Battlefield(); 
   App.battlefield.initialize();
+  sparkle_init();
 }
 
 $(function(){ init(); })

@@ -20,12 +20,14 @@ App.Graph = function(options){
 
   this.add_movement_button = function(button, desired_x, desired_y){
     var color, residing_unit, movement_buttons = this.battlefield.movement_buttons, index;
+    color = 'black';
 
     _.each( App.battlefield.attackers, function(unit){
       if(unit != null && unit.el.x == desired_x && unit.el.y == desired_y){
         color = '#FF0000'; 
         residing_unit = unit
-      } else {color = 'black';}
+        return false;
+      }
     })
     
     movement_buttons.push( this.stage.addChild(new MovementButton(' ', color)))
@@ -94,6 +96,27 @@ App.Graph = function(options){
     (function(desired_x, desired_y){ if (self.can_move_south_west(desired_x, desired_y)){ self.add_movement_button(button, desired_x, desired_y) } })(button.x - j, button.y + j);
   };
 
+  this.create_map_tiles = function(button){
+    this.battlefield.remove_movement_buttons();
+    var x, y;
+
+    for(var row = 0; row < 25; row++){
+      x = row * 32;
+
+      for(var col = 0; col < 25; col++){
+        y = col * 32;
+        if(x == button.x && y == button.y ){
+        } else {
+          if(!this.climbing_mountain({x:x, y:y})){
+            this.add_movement_button(button, x, y);
+          }
+        }
+      }
+    }
+    this.find_map_paths(this.battlefield.movement_buttons);
+    this.delete_buttons_with_unreachable_paths();
+  }
+
   this.create_movement_tiles = function(button, infantry_ranges){
     this.battlefield.remove_movement_buttons();
     this.add_movement_button(button, button.x, button.y);
@@ -109,7 +132,7 @@ App.Graph = function(options){
       }
     });
 
-    this.find_all_paths(this.battlefield.movement_buttons);
+    this.find_unit_paths(this.battlefield.movement_buttons);
     this.delete_buttons_with_unreachable_paths();
   };
 
@@ -151,7 +174,7 @@ App.Graph = function(options){
     return result;
   };
 
-  this.find_all_paths = function(grid){
+  this.find_unit_paths = function(grid){
     _.each( grid, function(button){
       var x = button.x;
       var y = button.y;
@@ -175,8 +198,33 @@ App.Graph = function(options){
         })
       })
     });
-  };
+  }
 
+  this.find_map_paths = function(grid){
+    _.each( grid, function(button){
+      var x = button.x;
+      var y = button.y;
+      var adjacent_hash = [ 
+        {x: x + 32, y: y}, {x: x - 32, y: y}, 
+        {x: x, y: y + 32}, {x: x, y: y - 32}, 
+        {x: x + 32 , y: y - 32}, {x: x - 32 , y: y + 32}, 
+        {x: x + 32 , y: y + 32}, {x: x - 32 , y: y - 32} 
+      ];
+      comparison_buttons = grid.slice(0);
+  
+      var position;
+      _.each( comparison_buttons, function(comparison_button, i){ if(comparison_button.phase_id == button.phase_id){ position = i; } });
+      comparison_buttons.splice(position,1);
+  
+      _.each( comparison_buttons, function(comparison_button){
+        _.each( adjacent_hash, function(coordinates){
+          if( comparison_button.x == coordinates.x && comparison_button.y == coordinates.y){
+            button.connections.push(comparison_button.path_id)        
+          }
+        })
+      })
+    });
+  }
   this.shortest_path = function(button, paths_traveled){
   }
   return(this);

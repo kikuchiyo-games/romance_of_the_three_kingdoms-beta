@@ -9,8 +9,8 @@
     //stage = new createjs.Stage(canvas);
     // attach mouse handlers directly to the source canvas.
     // better than calling from canvas tag for cross browser compatibility:
-    stage.addEventListener("stagemousemove", moveCanvas);
-    stage.addEventListener("stagemousedown", clickCanvas);
+    //stage.addEventListener("stagemousemove", moveCanvas);
+    //App.battlefield.stage.addEventListener("stagemousedown", clickCanvas);
 
     // define simple sprite sheet data specifying the image(s) to use, the size of the frames,
     // and the registration point of the frame
@@ -24,10 +24,10 @@
     sprite = new createjs.Sprite(new createjs.SpriteSheet(data));
 
     // add a text object to output the current FPS:
-    fpsLabel = new createjs.Text("-- fps", "bold 14px Arial", "#FFF");
-    stage.addChild(fpsLabel);
-    fpsLabel.x = 10;
-    fpsLabel.y = 20;
+    //fpsLabel = new createjs.Text("-- fps", "bold 14px Arial", "#FFF");
+    //stage.addChild(fpsLabel);
+    //fpsLabel.x = 10;
+    //fpsLabel.y = 20;
 
     // start the tick and point it at the window so we can do some work before updating the stage:
     createjs.Ticker.setFPS(20);
@@ -38,9 +38,9 @@
   function tick(event) {
       // loop through all of the active sparkles on stage:
       var canvas = document.getElementById('game_map');
-      var l = stage.getNumChildren();
+      var l = App.battlefield.stage.getNumChildren();
       for(var i = l - 1; i > 0; i--) {
-          var sparkle = stage.getChildAt(i);
+          var sparkle = App.battlefield.stage.getChildAt(i);
           if (sparkle.name != 'SPARKLE'){break;}
           // apply gravity and friction
           sparkle.vY += 2;
@@ -54,24 +54,24 @@
 
           //remove sparkles that are off screen or not invisble
           if (sparkle.alpha <= 0 || sparkle.y > canvas.height) {
-              stage.removeChildAt(i);
+              App.battlefield.stage.removeChildAt(i);
           }
       }
 
-      fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+      //fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
 
       // draw the updates to stage
-      stage.update(event);
+      App.battlefield.stage.update(event);
   }
 
   //sparkle explosion
   function clickCanvas(evt) {
-      addSparkles(Math.random() * 200 + 100 | 0, stage.mouseX, stage.mouseY, 2);
+      addSparkles(Math.random() * 200 + 100 | 0, App.battlefield.stage.mouseX, App.battlefield.stage.mouseY, 2);
   }
 
   //sparkle trail
   function moveCanvas(evt) {
-      addSparkles(Math.random() * 2 + 1 | 0, stage.mouseX, stage.mouseY, 1);
+      addSparkles(Math.random() * 2 + 1 | 0,App.battlefield.stage.mouseX, App.battlefield.stage.mouseY, 1);
   }
 
   function addSparkles(count, x, y, speed) {
@@ -84,7 +84,7 @@
           sparkle.x = x;
           sparkle.y = y;
           sparkle.name = "SPARKLE";
-          //sparkle.rotation = Math.random()*360;
+          sparkle.rotation = Math.random()*360;
           sparkle.alpha = Math.random() * 0.5 + 0.5;
           sparkle.scaleX = sparkle.scaleY = Math.random() + 0.3;
 
@@ -98,9 +98,9 @@
 
           // start the animation on a random frame:
           sparkle.gotoAndPlay(Math.random() * sparkle.spriteSheet.getNumFrames());
-
           // add to the display list:
-          stage.addChild(sparkle);
+          App.battlefield.stage.addChild(sparkle);
+          setTimeout(function(){App.battlefield.stage.removeChild(sparkle)}, 1000);
       }
   }
 

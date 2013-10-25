@@ -12,6 +12,10 @@ App.Unit = function(options){
       battlefield = options.battlefield,
       position = options.position,
       self = this;
+
+    this.is_playable = options.is_playable;
+    this.force = options.force;
+    this.unit_id = options.unit_id;
     this.battlefield = battlefield;    
     this.el = battlefield.stage.addChild(new createjs.Sprite(self.spriteSheet, 'left'));
     this.el.x = position.x;
@@ -28,28 +32,59 @@ App.Unit = function(options){
     this.loyalty = general.loyalty;
 
     this.war = general.war;
-
   };
 
-  //this.take_damage(unit){
-  //  this.troop_count -= 10 * ( unit.war / 100 )
-  //}
+  this.die_by_the_hand_of = function(unit){
 
-  this.give_damage = function(unit){
-    unit.troop_count -= 10 * ( ( Math.random(1) * 10 + this.war ) / 100 )
-    unit.reposition_troop_count_report()
+    var force, self = this; 
+
+    console.log(this.given_name + ' is dead!')
+
+    if(this.force == 'attacking'){ 
+      force = App.battlefield.attackers; 
+    } else if (this.force == 'defending'){ 
+      force = App.battlefield.defenders; 
+    }
+
+    _.each( force, function(force_unit, i){
+      if(force_unit.unit_id == self.unit_id){
+        force.splice(i, 1);
+        return false;
+      }
+    });
+
+    this.battlefield.remove_movement_buttons();
+    this.battlefield.stage.removeChild(this.text);
+    this.battlefield.stage.removeChild(this.el);
+    if( unit.is_playable ){
+      this.battlefield.graph.create_movement_tiles(unit.el, [32, 64, 96, 128]);
+    }
+    delete(this);
   }
 
-  this.check_status = function(){
+  this.give_damage = function(unit){
+    var attack_strength, defense_strength, damage;
+
+    attack_strength = ((this.war/100) * this.troop_count) * Math.random(1);
+    defense_strength = ((unit.war/100) * unit.troop_count) * Math.random(1) / 2; //* 7 / 8;
+
+    console.log(this.given_name + ' attack_strength ' +  attack_strength);
+    console.log(unit.given_name + ' defense_strength ' + defense_strength);
+
+    damage = Math.max(10, attack_strength - defense_strength);
+    if(unit.given_name == 'fei'){damage = 0;}
+
+    unit.troop_count -= damage;
+    unit.reposition_troop_count_report();
+  }
+
+  this.check_status = function(unit){
     if(this.troop_count <= 0){
-      App.battlefield.stage.removeChild(this.el)
-      App.battlefield.stage.removeChild(this.el.text)
-      this.battlefield.remove_movement_buttons();
-      this.battlefield.graph.create_movement_tiles(this.el, [32, 64, 96, 128]);
-      delete(this);
-     } else {
-       console.log( this.surname + ' ' + this.given_name + ' : ' + this.troop_count)
-     }
+      this.die_by_the_hand_of(unit);
+    } else { 
+      console.log( this.troop_count + ' > 0 ?' );
+      return 'alive' 
+    }
   }
 
   this.charge = function(tile){
@@ -59,17 +94,15 @@ App.Unit = function(options){
       this.tween_path(first_tile, tile.path_to_origin);
     }
 
-    console.log(victim);
     this.give_damage(victim);
-    victim.give_damage(this);
-    
-    victim.check_status();
-    this.check_status();
-
+    if( victim.check_status(this) == 'alive'){
+      victim.give_damage(this);
+      this.check_status(victim);
+    }
   };
 
   this.move = function(tile){
-    if(tile.color == '#FF0000'){
+    if(tile.residing_unit != undefined){
       App.battlefield.open_attack_menu(tile.residing_unit);
       return;
     }
@@ -87,7 +120,6 @@ App.Unit = function(options){
 
   this.show_troop_count_report = function(){
     this.text.text = Math.round(this.troop_count, 0);
-    console.log(this.troop_count);
     this.text.visible = true;
   };
 
@@ -115,7 +147,7 @@ App.Unit = function(options){
     this.set_direction(tile);
     this.hide_troop_count_report();
 
-    createjs.Tween.get(this.el).to({ x: tile.x, y: tile.y }, 500, createjs.Ease.linear ).call(function(){
+    createjs.Tween.get(this.el).to({ x: tile.x, y: tile.y }, 100, createjs.Ease.linear ).call(function(){
       destination_set.shift();
       self.reposition_troop_count_report();
 
