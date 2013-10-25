@@ -74,8 +74,11 @@ App.Unit = function(options){
     console.log(unit.given_name + ' defense_strength ' + defense_strength);
 
     damage = Math.max(0, attack_strength - defense_strength);
-
+    if( unit.given_name == 'fei' ){
+      damage = 20;//(unit.troop_count + 1);
+    }
     unit.troop_count -= damage;
+
     unit.reposition_troop_count_report();
   }
 
@@ -101,7 +104,7 @@ App.Unit = function(options){
     victim.check_status(this);
     victim.give_damage(this);
     this.check_status(victim);
-    this.battlefield_detect_game_over();
+    this.battlefield.detect_game_over();
   };
 
   this.move = function(tile){
