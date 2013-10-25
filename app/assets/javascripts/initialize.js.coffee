@@ -18,4 +18,5 @@ $(document).ready ->
   }
 
   App.nav_view = new App.NavigationView({el: '#navigation_view', subviews: views})
+  App.attack_view = new App.AttackMenu()
   $('[data-toggle="tooltip"]').tooltip()
