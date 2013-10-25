@@ -60,6 +60,9 @@
       App.battlefield.stage.removeChild(App.battlefield.ally_unit);
     }
 
+    _.each( App.movement_buttons, function(button){ App.battlefield.stage.removeChild(button); });
+    App.battlefield.graph.create_movement_tiles(App.battlefield.ally_unit, [32, 64, 96, 128]);
+
   }
 
   p.handleClick = function (event) {    
