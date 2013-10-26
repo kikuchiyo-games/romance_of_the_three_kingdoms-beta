@@ -153,10 +153,7 @@ function Battlefield() {
     },
 
     play_out_cpu_turn: function(){
-      var self = this;
-      _.each( self.attackers, function(attacker){
-        attacker.simulate_action();
-      });
+      _.each( this.attackers, function(attacker){ attacker.simulate_action(); });
     },
 
     find_tile_by_coordinates: function(coordinates){

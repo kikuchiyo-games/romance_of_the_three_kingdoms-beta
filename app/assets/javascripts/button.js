@@ -4,7 +4,7 @@
     this.initialize(label, color);
   }
 
-  var p = Button.prototype = new createjs.Container(); // inherit from Container
+  var p = Button.prototype = new createjs.Container();
   
   p.label;
   p.background;
@@ -42,62 +42,12 @@
     this.path_to_origin.pop();
     App.battlefield.close_attack_menu();
     App.battlefield.active_unit.charge(this);
-    //// the rest should be handled by unit;
-    //tween_to(App.battlefield.ally_unit, this.path_to_origin);
-    //App.battlefield.enemy_unit.troop_count -= 10;
-    //App.battlefield.ally_unit.troop_count -= 10;
-    //App.battlefield.deduct_enemy_troops(App.battlefield.enemy_unit);
-    //if(App.battlefield.enemy_unit.troop_count <= 0){
-    //  App.battlefield.stage.removeChild(App.battlefield.enemy_unit)
-    //  App.battlefield.enemy_unit = null
-    //}
-
-    //if(App.battlefield.ally_unit.troop_count <= 0){
-    //  App.battlefield.stage.removeChild(App.battlefield.ally_unit);
-    //}
-    //this.battlefield.remove_movement_buttons(); 
-    ////_.each( App.movement_buttons, function(button){ App.battlefield.stage.removeChild(button); });
-    //App.battlefield.graph.create_movement_tiles(App.battlefield.ally_unit, [32, 64, 96, 128]);
   }
 
   p.handleClick = function (event) {    
-    // should be handled by unit;
     var tile = event.target.parent;
     App.battlefield.active_unit.move(tile);
   } 
-
-  //function tween_to(unit, destination_set){
-  //  var battlefield = App.battlefield;
-  //  var graph = battlefield.graph;
-  //  var destination; 
-  //  this.battlefield.find_tile_by_path_id(destination_set[0])
-  //  _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
-
-  //  if ( destination == undefined ){ return; }
-
-  //  if(destination.x < unit.x){
-  //    unit.gotoAndPlay('left'); 
-  //  } else if(destination.x > unit.x){  unit.gotoAndPlay('right'); }
-
-  //  createjs.Tween.get(unit).to({ x: destination.x, y: destination.y }, 100, createjs.Ease.linear ).call(function(){
-  //    var destination;
-  //    destination_set.shift();
-
-  //    if (destination_set.length > 0){
-  //      _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
-
-  //      if( unit.x <  destination.x){ 
-  //        unit.gotoAndPlay('right'); 
-  //      } else if( unit.x >  destination.x){ unit.gotoAndPlay('left'); }
-
-  //      tween_to(unit, destination_set);
-
-  //    } else {
-  //      _.each( App.movement_buttons, function(button){ battlefield.stage.removeChild(button); });
-  //      graph.create_movement_tiles(unit, [32, 64, 96, 128]);
-  //    }
-  //  });
-  //} 
 
   p.handleTick = function(event) { p.alpha = 0.4; }
   window.MovementButton = Button;

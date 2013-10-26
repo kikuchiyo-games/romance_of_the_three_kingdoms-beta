@@ -35,6 +35,9 @@ App.Unit = function(options){
   };
 
   this.simulate_action = function(){
+    var self = this;
+    this.battlefield.graph.create_map_tiles(this);
+    //this.move(this.battlefield.graph.create_map_tiles(this));
   };
 
   this.die_by_the_hand_of = function(unit){
@@ -93,6 +96,14 @@ App.Unit = function(options){
     this.check_status(victim);
     this.battlefield.detect_game_over();
   };
+
+  this.simulated_move = function(path){
+    var first_tile = App.battlefield.find_tile_by_path_id(path[0]);
+    this.set_direction(first_tile)
+
+    this.battlefield.mute_movement_buttons();
+    this.tween_path(first_tile, path);
+  }
 
   this.move = function(tile){
     if(tile.residing_unit != undefined){
@@ -156,6 +167,21 @@ App.Unit = function(options){
     });
   }
 
+  this.tween_through = function(tiles){
+    var self = this;
+    this.hide_troop_count_report();
+    tile = tiles.pop();
+
+    if (tile.distance_to_target >= 32){
+      createjs.Tween.get(this.el).to({ x: tile.x, y: tile.y }, 100, createjs.Ease.linear ).call(function(){
+        self.reposition_troop_count_report();
+        console.log(tile.distance_to_target);
+        self.tween_through(tiles);
+      });
+    }
+  }
+
   this.initialize(options);
+
   return(this);
 };
