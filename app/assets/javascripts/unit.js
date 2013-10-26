@@ -34,11 +34,11 @@ App.Unit = function(options){
     this.war = general.war;
   };
 
+  this.simulate_action = function(){
+  };
+
   this.die_by_the_hand_of = function(unit){
-
     var force, self = this; 
-
-    console.log(this.given_name + ' is dead!')
 
     if(this.force == 'attacking'){ 
       force = this.battlefield.attackers; 
@@ -56,25 +56,19 @@ App.Unit = function(options){
     this.battlefield.remove_movement_buttons();
     this.battlefield.stage.removeChild(this.text);
     this.battlefield.stage.removeChild(this.el);
+
     if( unit.is_playable ){
       this.battlefield.graph.create_movement_tiles(unit.el, [32, 64, 96, 128]);
-    } else {
-      this.battlefield.update_active_unit();
-    }
+    } else { this.battlefield.update_active_unit(); }
+
     delete(this);
   }
 
   this.give_damage = function(unit){
     var attack_strength, defense_strength, damage;
-
     attack_strength = ((this.war/100) * this.troop_count) * Math.random(1);
     defense_strength = ((unit.war/100) * unit.troop_count) * Math.random(1) * 7 / 8;
-
-    console.log(this.given_name + ' attack_strength ' +  attack_strength);
-    console.log(unit.given_name + ' defense_strength ' + defense_strength);
-
     damage = Math.max(0, attack_strength - defense_strength);
-
     unit.troop_count -= damage;
     unit.reposition_troop_count_report();
   }
@@ -82,10 +76,7 @@ App.Unit = function(options){
   this.check_status = function(unit){
     if(this.troop_count <= 0){
       this.die_by_the_hand_of(unit);
-    } else { 
-      console.log( this.troop_count + ' > 0 ?' );
-      return 'alive' 
-    }
+    } else { return 'alive' }
   }
 
   this.charge = function(tile){
@@ -93,13 +84,12 @@ App.Unit = function(options){
       first_tile = this.battlefield.find_tile_by_path_id(tile.path_to_origin[0]);
     if( first_tile != undefined ){
       this.tween_path(first_tile, tile.path_to_origin);
-    } else {
-      this.battlefield.update_active_unit();
-    }
+    } else { this.battlefield.update_active_unit(); }
 
     this.give_damage(victim);
     victim.check_status(this);
     victim.give_damage(this);
+
     this.check_status(victim);
     this.battlefield.detect_game_over();
   };
@@ -138,6 +128,7 @@ App.Unit = function(options){
   };
 
   this.set_direction = function(tile){
+    console.log(this.force);
     if(tile.x < this.el.x){
       this.el.gotoAndPlay('left'); 
     } else if(tile.x > this.el.x){  
@@ -159,8 +150,8 @@ App.Unit = function(options){
         self.set_direction(new_tile);
         self.tween_path(new_tile, destination_set);
       } else {
-        self.battlefield.remove_movement_buttons();
-        self.battlefield.update_active_unit();
+        //self.battlefield.remove_movement_buttons();
+        self.battlefield.update_active_unit()
       }
     });
   }

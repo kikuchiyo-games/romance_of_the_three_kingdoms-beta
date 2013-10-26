@@ -96,27 +96,6 @@ App.Graph = function(options){
     (function(desired_x, desired_y){ if (self.can_move_south_west(desired_x, desired_y)){ self.add_movement_button(button, desired_x, desired_y) } })(button.x - j, button.y + j);
   };
 
-  this.create_map_tiles = function(button){
-    this.battlefield.remove_movement_buttons();
-    var x, y;
-
-    for(var row = 0; row < 25; row++){
-      x = row * 32;
-
-      for(var col = 0; col < 25; col++){
-        y = col * 32;
-        if(x == button.x && y == button.y ){
-        } else {
-          if(!this.climbing_mountain({x:x, y:y})){
-            this.add_movement_button(button, x, y);
-          }
-        }
-      }
-    }
-    this.find_map_paths(this.battlefield.movement_buttons);
-    this.delete_buttons_with_unreachable_paths();
-  }
-
   this.create_movement_tiles = function(button, infantry_ranges){
     this.battlefield.remove_movement_buttons();
     this.add_movement_button(button, button.x, button.y);
@@ -142,7 +121,7 @@ App.Graph = function(options){
 
     _.each(test_buttons, function(button){ if( !self.path_to_origin_exists(button, [], button) ){ self.stage.removeChild(button); } });
 
-    this.stage.removeChild(this.battlefield.movement_buttons[0]);
+    //this.stage.removeChild(this.battlefield.movement_buttons[0]);
   };
 
   this.climbing_mountain = function(coordinates){
@@ -160,7 +139,9 @@ App.Graph = function(options){
   
     if(button.connections.indexOf(0) != -1){
       paths_traveled.unshift(original_button.path_id);
+      //first path found
       original_button.path_to_origin = paths_traveled.getUnique().reverse();
+      //need smarter algorithm that finds shortest path for ai...
       return true;
     } else {
       if( paths_traveled.indexOf(button.phase_id) == -1){paths_traveled.push(button.path_id);}
@@ -200,22 +181,51 @@ App.Graph = function(options){
     });
   }
 
+  this.create_map_tiles = function(button){
+    var x, y;
+    this.battlefield.remove_movement_buttons();
+
+    this.add_movement_button(button, button.x, button.y); 
+
+    for(var row = 0; row < 25; row++){ x = row * 32;
+      for(var col = 0; col < 25; col++){ y = col * 32;
+        if(!(x == button.x && y == button.y) && !this.climbing_mountain({x:x, y:y})){ 
+          this.add_movement_button(button, x, y); 
+        }
+      }
+    }
+
+    this.find_unit_paths(this.battlefield.movement_buttons);
+    var source = this.battlefield.find_tile_by_coordinates({x: button.x, y: button.y});
+    //this.delete_buttons_with_unreachable_paths();
+
+    var defender = this.battlefield.defenders[0];
+    var target = this.battlefield.find_tile_by_coordinates({x: defender.el.x, y: defender.el.y})
+    this.dijkatra(this.battlefield.movement_buttons, source, target);
+
+  };
+
   this.find_map_paths = function(grid){
     _.each( grid, function(button){
       var x = button.x;
       var y = button.y;
+
       var adjacent_hash = [ 
         {x: x + 32, y: y}, {x: x - 32, y: y}, 
-        {x: x, y: y + 32}, {x: x, y: y - 32}, 
+        {x: x, y: y + 32}, {x: x, y: y - 32},
         {x: x + 32 , y: y - 32}, {x: x - 32 , y: y + 32}, 
         {x: x + 32 , y: y + 32}, {x: x - 32 , y: y - 32} 
       ];
+
       comparison_buttons = grid.slice(0);
   
       var position;
-      _.each( comparison_buttons, function(comparison_button, i){ if(comparison_button.phase_id == button.phase_id){ position = i; } });
+      _.each( comparison_buttons, function(comparison_button, i){ 
+        if(comparison_button.phase_id == button.phase_id){ position = i; } 
+      });
+
       comparison_buttons.splice(position,1);
-  
+       
       _.each( comparison_buttons, function(comparison_button){
         _.each( adjacent_hash, function(coordinates){
           if( comparison_button.x == coordinates.x && comparison_button.y == coordinates.y){
@@ -224,8 +234,6 @@ App.Graph = function(options){
         })
       })
     });
-  }
-  this.shortest_path = function(button, paths_traveled){
   }
   return(this);
 }

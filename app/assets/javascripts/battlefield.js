@@ -82,11 +82,8 @@ function Battlefield() {
       this.active_unit = this.defenders[0]
       this.graph = new App.Graph({battlefield: this});
       this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128]);
-      //this.graph.create_map_tiles(this.active_unit.el)
-
       createjs.Ticker.addEventListener("tick", this.stage);
       this.stage.enableMouseOver(200);
-
     }, 
 
     announce_victory: function(){
@@ -107,7 +104,6 @@ function Battlefield() {
       alert('defeat!');
     },
 
-
     detect_game_over: function(){
       if(this.attackers.length == 0){
         this.announce_victory();
@@ -125,7 +121,13 @@ function Battlefield() {
     update_active_unit: function(){
       if (!this.game_over && !this.detect_game_over()){
         this.active_unit = this.next_force_unit();
-        this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128])
+        if(this.active_unit.force == 'defending'){
+          this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128])
+        } else {
+          this.play_out_cpu_turn();
+          this.active_unit = this.next_force_unit();
+          this.graph.create_movement_tiles(this.active_unit.el, [32, 64, 96, 128])
+        }
       }
     },
 
@@ -134,28 +136,41 @@ function Battlefield() {
 
       if(unit.force == 'defending'){
         force = this.defenders; 
-      } else { force = this.attackers; }
+        opposing_force = this.attackers;
+      } else { 
+        force = this.attackers; 
+        opposing_force = this.defenders;
+      }
 
       index = force.indexOf(unit);
-      console.log('index = ' + index);
+
       if(index == force.length - 1){
         next_force_index = 0;
-      } else {
-        next_force_index = index + 1;
-      }
-      console.log('next_force_index = ' + next_force_index);
+        force = opposing_force;
+      } else { next_force_index = index + 1; }
+
       return(force[next_force_index]);
     },
 
+    play_out_cpu_turn: function(){
+      var self = this;
+      _.each( self.attackers, function(attacker){
+        attacker.simulate_action();
+      });
+    },
+
+    find_tile_by_coordinates: function(coordinates){
+      return _.find(self.movement_buttons, function(button){ 
+        return button.x == coordinates.x && button.y == coordinates.y
+      });
+    },
+
     find_tile_by_path_id: function(path_id){
-      var self = this, tile;
-      _.each(self.movement_buttons, function(button){ if(button.path_id == path_id){ tile = button; } });
-      return(tile);
+      return _.find(this.movement_buttons, function(button){ return button.path_id == path_id });
     },
 
     mute_movement_buttons: function(){
-      var self = this;
-      _.each( self.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
+      _.each( this.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
     },
 
     reset_movement_buttons: function(){
@@ -163,35 +178,15 @@ function Battlefield() {
     },
 
     remove_movement_buttons: function(){
-      var self = this;
-      _.each( self.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
+      _.each( this.movement_buttons, function(button){button.removeAllEventListeners(); button.alpha = 0;});
       this.reset_movement_buttons();
     },
 
     close_attack_menu: function(enemy_unit){
       this.content.visible = false;
-      //this.stage.removeChild(this.content);
-      //this.stage.removeChild(this.container);
     },
 
     deduct_enemy_troops: function(enemy_unit){
-      //$('#attack_menu .battlefield-officer').html( enemy_unit.surname + ' ' + enemy_unit.given_name );
-      //this.container = new createjs.Container();
-      //this.stage.addChild(this.container);
-      //
-      //this.content = new createjs.DOMElement("enemy_troop_count");
-      //this.content.regX = App.battlefield.enemy_unit.x + 32;
-      //this.content.regY = App.battlefield.enemy_unit.y;
-      //
-      //this.container.addChild(this.content);
-      //this.container.x = App.battlefield.enemy_unit.x + 30;
-      //this.container.y = App.battlefield.enemy_unit.y;
-      //alert(this.container.x);
-      //this.container.alpha = 0.8;
-      //$('#enemy_troop_count').css('left', App.battlefield.enemy_unit.x + 'px');
-      //this.content.visible = true;
-      //$('#enemy_troop_count').addClass('bounceOut');
-
     },
 
     open_attack_menu: function(unit){
@@ -230,8 +225,10 @@ function Battlefield() {
 
     assault: function(event){
     },
+
     dual: function(event){
     },
+
     bribe: function(event){
     }
   })
