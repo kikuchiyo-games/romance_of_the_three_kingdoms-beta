@@ -19,7 +19,8 @@ var Unit = function(options){
   };
 
   this.attack = function(){
-
+    this.move();
+    console.log('attack');
   };
 
   this.start_turn = function(){

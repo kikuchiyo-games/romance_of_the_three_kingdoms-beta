@@ -24,7 +24,8 @@ class App.AttackMenu extends Backbone.View
     @region_animation.close_attack_menu()
 
   charge: (event)->
-    alert('so you wanna charge eh?')
+    @region_animation.skirmish()
+    # alert('so you wanna charge eh?')
     # path_id = parseInt($(event.currentTarget).attr('path_id'))
 
     # @destination = null

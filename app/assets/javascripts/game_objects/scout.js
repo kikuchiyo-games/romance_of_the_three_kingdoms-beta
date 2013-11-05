@@ -21,14 +21,26 @@ Scout = function(options){
     this.calculate_paths();
   };
 
+  this.closest_vacant_region_pid = function(){
+    var self = this, vacant_regions = _.filter(this.regions, function(region){
+      return region.el.residing_ally == undefined && region.el.residing_enemy == undefined && !(region.x == self.origin.el.x && region.y == self.origin.el.y) 
+    });
+    return _.min(vacant_regions, function(region){ return region.distance }).pid
+  };
+
   this.calculate_enemies = function(){
-    var self = this, enemies = _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name }),
-      residing_enemy; 
+    var self = this, 
+      residing_enemy,
+      enemies = _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name }),
+      allies = _.filter(this.world.units, function(unit){
+        return unit != self.unit && unit.force.name == self.unit.force.name
+      }); 
     _.each(this.regions, function(region){
       residing_enemy = _.filter(enemies, function(enemy){return enemy.animation.el.x == region.x && enemy.animation.el.y == region.y});
-      if(residing_enemy.length > 0){
-        region.el.vacate(residing_enemy[0]);
-      }
+
+      residing_ally = _.filter(allies, function(ally){return ally.animation.el.x == region.x && ally.animation.el.y == region.y});
+      if(residing_enemy.length > 0){ region.el.mark_enemy(residing_enemy[0]); }
+      if(residing_ally.length > 0){ region.el.mark_ally(residing_ally[0]); }
     });
   };
 

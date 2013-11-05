@@ -9,7 +9,8 @@ p.Container_initialize = p.initialize;
 p.initialize = function(options){
   var width = 32, height = 32, background = new createjs.Shape();
   _.bindAll(this, 'chosen');
-  _.bindAll(this, 'vacate');
+  _.bindAll(this, 'mark_ally');
+  _.bindAll(this, 'mark_enemy');
   _.bindAll(this, 'open_attack_menu');
   _.bindAll(this, 'close_attack_menu');
   this.Container_initialize();
@@ -26,7 +27,16 @@ p.chosen = function(event){
   this.discoverer.origin.travel_to(this.pid)
 };
 
-p.vacate = function(unit){
+p.skirmish = function(){
+  this.close_attack_menu();
+  this.discoverer.origin.attack(this.pid);
+}
+
+p.mark_ally = function(unit){
+  this.residing_ally = unit;
+};
+
+p.mark_enemy = function(unit){
   this.residing_enemy = unit;
   this.removeChild(this.background);
   this.background = new createjs.Shape();
