@@ -9,11 +9,15 @@ p.Container_initialize = p.initialize;
 p.initialize = function(options){
   var width = 32, height = 32, background = new createjs.Shape();
   _.bindAll(this, 'chosen');
+  _.bindAll(this, 'vacate');
+  _.bindAll(this, 'open_attack_menu');
+  _.bindAll(this, 'close_attack_menu');
   this.Container_initialize();
   this.discoverer = options.discoverer;
   this.alpha = 0.4;
   this.field = options.field
   background.graphics.beginFill(options.color).drawRoundRect(0, 0, width, height, 10);
+  this.background = background;
   this.addChild(background);
   this.addEventListener('click', this.chosen);
 };
@@ -22,106 +26,54 @@ p.chosen = function(event){
   this.discoverer.origin.travel_to(this.pid)
 };
 
-  //var Button = function(label, color) {
-  //  this.initialize(label, color);
+p.vacate = function(unit){
+  this.residing_enemy = unit;
+  this.removeChild(this.background);
+  this.background = new createjs.Shape();
+  this.background.graphics.beginFill('red').drawRoundRect(0, 0, 32, 32, 10)
+  this.addChild(this.background);
+  this.removeEventListener('click', this.chosen);
+  this.addEventListener('click', this.open_attack_menu);
+};
+
+p.open_attack_menu = function(){
+  this.attack_menu = new App.AttackMenu({unit: this.residing_enemy, region_animation: this});
+  var enemy = this.residing_enemy,
+    general = this.residing_enemy.general;
+
+  $('#attack_menu .battlefield-officer').html( general.surname + ' ' + general.given_name );
+  $('#attack_menu .battlefield-officer-war').html( general.war );
+  $('#attack_menu .battlefield-officer-loyalty').html( general.loyalty );
+  $('#attack_menu .battlefield-officer-intelligence').html( general.intelligence );
+  $('#attack_menu .battlefield-officer-leadership').html( general.leadership );
+  $('#attack_menu .battlefield-officer-troops').html( Math.round(enemy.troop_count) );
+
+
+  //if (this.content != undefined){
+  //  this.container.removeChild(this.content);
+  //  delete this.container;
+  //  delete this.content;
   //}
 
-  //var p = Button.prototype = new createjs.Container(); // inherit from Container
-  //
-  //p.label;
-  //p.background;
-  //p.count = 0;
-  //
-  //p.Container_initialize = p.initialize;
+  this.container = new createjs.Container();
+  this.field.addChild(this.container);
 
-  //p.initialize = function(label, color) {
-  //  this.Container_initialize();
-  //  this.battlefield = App.battlefield;
-  //  this.label = label;
-  //  if (!color) { color = "#CCC"; }
-  //  this.color = color;
-  //  var text = new createjs.Text(label, "20px Arial", "#000");
-  //  text.textBaseline = "top";
-  //  text.textAlign = "center";
-  //  
-  //  var width = 32;
-  //  var height = 32;
-  //  
-  //  this.background = new createjs.Shape();
-  //  this.background._province_name = 'Hei Fei';
-  //  this.background.graphics.beginFill(color).drawRoundRect(0,0,width,height,10);
-  //  
-  //  text.x = width/2;
-  //  text.y = 10;
+  this.content = new createjs.DOMElement("attack_menu");
+  this.content.regX = enemy.animation.el.x + 32;
+  this.content.regY = enemy.animation.el.y;
 
-  //  this.addChild(this.background,text); 
-  //  this.addEventListener("click", this.handleClick);  
-  //  this.addEventListener("tick", this.handleTick);
-  //  this.cursor = 'pointer';
-  //} 
+  this.container.addChild(this.content);
+  this.container.x = enemy.animation.el.x + 30;
+  this.container.y = enemy.animation.el.y;
+  this.container.alpha = 0.8;
+};
 
-  //p.attack = function () {
-  //  this.path_to_origin.pop();
-  //  App.battlefield.close_attack_menu();
-  //  App.battlefield.active_unit.charge(this);
-  //  //// the rest should be handled by unit;
-  //  //tween_to(App.battlefield.ally_unit, this.path_to_origin);
-  //  //App.battlefield.enemy_unit.troop_count -= 10;
-  //  //App.battlefield.ally_unit.troop_count -= 10;
-  //  //App.battlefield.deduct_enemy_troops(App.battlefield.enemy_unit);
-  //  //if(App.battlefield.enemy_unit.troop_count <= 0){
-  //  //  App.battlefield.stage.removeChild(App.battlefield.enemy_unit)
-  //  //  App.battlefield.enemy_unit = null
-  //  //}
-
-  //  //if(App.battlefield.ally_unit.troop_count <= 0){
-  //  //  App.battlefield.stage.removeChild(App.battlefield.ally_unit);
-  //  //}
-  //  //this.battlefield.remove_movement_buttons(); 
-  //  ////_.each( App.movement_buttons, function(button){ App.battlefield.stage.removeChild(button); });
-  //  //App.battlefield.graph.create_movement_tiles(App.battlefield.ally_unit, [32, 64, 96, 128]);
-  //}
-
-  //p.handleClick = function (event) {    
-  //  // should be handled by unit;
-  //  var tile = event.target.parent;
-  //  App.battlefield.active_unit.move(tile);
-  //} 
-
-  ////function tween_to(unit, destination_set){
-  ////  var battlefield = App.battlefield;
-  ////  var graph = battlefield.graph;
-  ////  var destination; 
-  ////  this.battlefield.find_tile_by_path_id(destination_set[0])
-  ////  _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
-
-  ////  if ( destination == undefined ){ return; }
-
-  ////  if(destination.x < unit.x){
-  ////    unit.gotoAndPlay('left'); 
-  ////  } else if(destination.x > unit.x){  unit.gotoAndPlay('right'); }
-
-  ////  createjs.Tween.get(unit).to({ x: destination.x, y: destination.y }, 100, createjs.Ease.linear ).call(function(){
-  ////    var destination;
-  ////    destination_set.shift();
-
-  ////    if (destination_set.length > 0){
-  ////      _.each( App.movement_buttons, function(button){ if(button.path_id == destination_set[0]){ destination = button; } });
-
-  ////      if( unit.x <  destination.x){ 
-  ////        unit.gotoAndPlay('right'); 
-  ////      } else if( unit.x >  destination.x){ unit.gotoAndPlay('left'); }
-
-  ////      tween_to(unit, destination_set);
-
-  ////    } else {
-  ////      _.each( App.movement_buttons, function(button){ battlefield.stage.removeChild(button); });
-  ////      graph.create_movement_tiles(unit, [32, 64, 96, 128]);
-  ////    }
-  ////  });
-  ////} 
-
-  //p.handleTick = function(event) { p.alpha = 0.4; }
-//}
-
+p.close_attack_menu = function(){
+  this.content.visible = false;
+  this.attack_menu.destroy();
+  this.field.removeChild(this.content);
+  this.field.removeChild(this.container);
+  delete this.content;
+  delete this.container;
+},
 window.RegionAnimation = RegionAnimation;

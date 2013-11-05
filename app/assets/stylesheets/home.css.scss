@@ -8,9 +8,18 @@
 @import url("maps.css.scss");
 
 body {
+  #attack_menu-container {
+    background-color: black;
+    color:#FFF;
+    width:400px;
+    height:200px;
+    padding: 5px; 
+  }
+
   #attack_menu * {
     font-family: 'Star Jedi';
   }
+
   .center {
      float: none;
      margin-left: auto;

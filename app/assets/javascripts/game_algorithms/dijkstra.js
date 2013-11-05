@@ -52,7 +52,6 @@
         queue[u.pid].handled = true;
 
       }
-      console.log(not_handled);
       return {queue: queue, pi: pi}
     }
   };

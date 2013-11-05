@@ -1,5 +1,6 @@
-Force = function(){
-  this.initialize = function(){
+Force = function(options){
+  this.initialize = function(options){
+    this.name = options.name;
   }
-  this.initialize();
+  this.initialize(options);
 };

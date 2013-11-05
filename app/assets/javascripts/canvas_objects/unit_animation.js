@@ -1,7 +1,7 @@
 var UnitAnimation = function(options){
   this.initialize = function(options){
     this.data = {
-      images: ["assets/calvalry-unit-sprite-sheet.png"],
+      images: ["assets/" + options.type + "-unit-sprite-sheet.png"],
       frames: {width:32, height:32},
       animations: {left:[0], right:[1]}
     };
@@ -11,7 +11,7 @@ var UnitAnimation = function(options){
     this.field = options.field;
     this.spriteSheet = new createjs.SpriteSheet(this.data);
     
-    this.el = this.field.addChild(new createjs.Sprite(this.spriteSheet, 'right'));
+    this.el = this.field.addChild(new createjs.Sprite(this.spriteSheet, 'left'));
     this.el.x = options.position.x;
     this.el.y = options.position.y;
   }
@@ -37,7 +37,6 @@ var UnitAnimation = function(options){
     }
     var self = this, region_pid = path.shift(), region = this.unit.scout.fetch_region_by_pid(region_pid);
     createjs.Tween.get(this.el).to({ x: region.x, y: region.y }, 100, createjs.Ease.linear ).call(function(){
-      console.log(path)
       self.animate(path);
     });
   }

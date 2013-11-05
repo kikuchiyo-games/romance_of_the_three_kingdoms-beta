@@ -2,6 +2,8 @@ Scout = function(options){
   this.initialize = function(options){
     this.validate_options(options);
     this.general = options.general
+    this.unit = options.unit;
+    this.world = options.world;
     this.origin = options.unit.animation;
     this.field = options.field;
     this.range = 3;
@@ -14,8 +16,20 @@ Scout = function(options){
 
   this.survey = function(){
     this.calculate_regions();
+    this.calculate_enemies();
     this.calculate_neighbors();
     this.calculate_paths();
+  };
+
+  this.calculate_enemies = function(){
+    var self = this, enemies = _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name }),
+      residing_enemy; 
+    _.each(this.regions, function(region){
+      residing_enemy = _.filter(enemies, function(enemy){return enemy.animation.el.x == region.x && enemy.animation.el.y == region.y});
+      if(residing_enemy.length > 0){
+        region.el.vacate(residing_enemy[0]);
+      }
+    });
   };
 
   this.rest = function(){
@@ -29,20 +43,24 @@ Scout = function(options){
 
   this.mountain = function(x, y){
     var mountain_region = _.find(App.mountains, function(mountain){return mountain.x == x && mountain.y == y});
-    console.log(mountain_region);
     return mountain_region != undefined;
   };
 
   this.calculate_regions = function(){
+    var self = this;
     this.regions = []; 
     var range = this.range, x, y;
     for(var row = -range; row <= range; row++){ x = this.origin.el.x + row * 32;
       for(var col = -range; col <= range; col++){ y = this.origin.el.y + col * 32;
         if (!this.mountain(x, y)){
-          this.regions.push(new ScoutRegion({discoverer: this, field: this.field, x: x, y: y})); 
+          this.add_region(x, y);
         }
       }
     }
+  };
+
+  this.add_region = function(x, y){
+    this.regions.push(new ScoutRegion({discoverer: this, field: this.field, x: x, y: y})); 
   };
 
   this.calculate_neighbors = function(){
