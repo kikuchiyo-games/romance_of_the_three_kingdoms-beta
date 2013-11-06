@@ -122,23 +122,32 @@ Scout = function(options){
     var range = this.range, x, y;
     for(var row = -range; row <= range; row++){ x = this.origin.el.x + row * 32;
       for(var col = -range; col <= range; col++){ y = this.origin.el.y + col * 32;
-        if (!this.mountain(x, y) && this.vacant(x, y)){
+        if (this.valid_region(x, y)){
           this.add_region(x, y, self.unit.player != 'cpu');
         }
       }
     }
   };
 
+  this.on_field = function(x, y){
+    var max = 32 * 25;
+    return x >= 0 && y >= 0 && x <= max && y <= max
+  };
+
+  this.valid_region = function(x, y){
+    return !this.mountain(x, y) && this.vacant(x, y) && this.on_field(x, y);
+  };
+
   this.calculate_world_regions = function(){
     var self = this;
     this.regions = []; 
     var range = this.range, x, y;
-    _.each(App.plains, function(coordinates){        if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.forests, function(coordinates){       if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.hills, function(coordinates){         if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.fortresses, function(coordinates){    if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.water_regions, function(coordinates){ if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.other_regions, function(coordinates){ if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.plains, function(coordinates){        if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.forests, function(coordinates){       if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.hills, function(coordinates){         if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.fortresses, function(coordinates){    if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.water_regions, function(coordinates){ if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.other_regions, function(coordinates){ if(self.valid_region(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
   };
 
   this.add_region = function(x, y, active){

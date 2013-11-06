@@ -6,6 +6,8 @@ Battlefield = function(){
       this.map = new Map();
       this.populate();
       this.turn();
+      this.width = 32 * 25;
+      this.height = 32 * 25;
     }, 
 
     turn: function(){
