@@ -16,6 +16,7 @@ p.initialize = function(options){
   this.Container_initialize();
   this.discoverer = options.discoverer;
   this.active = options.active;
+
   if(options.active){
     this.alpha = 0.4;
   } else { this.alpha = 0.0; }
@@ -56,6 +57,14 @@ p.mark_enemy = function(unit){
 };
 
 p.open_attack_menu = function(){
+  _.each(this.discoverer.regions, function(region){
+    if(region.el.residing_enemy != undefined){
+      region.el.removeEventListener('click', region.el.open_attack_menu);
+
+    } else { region.el.removeEventListener('click', region.el.chosen); }
+
+  });
+
   this.attack_menu = new App.AttackMenu({unit: this.residing_enemy, region_animation: this});
   var enemy = this.residing_enemy,
     general = this.residing_enemy.general;
@@ -81,6 +90,13 @@ p.open_attack_menu = function(){
 };
 
 p.close_attack_menu = function(){
+  _.each(this.discoverer.regions, function(region){
+    if(region.el.residing_enemy != undefined){
+      region.el.addEventListener('click', region.el.open_attack_menu);
+
+    } else { region.el.addEventListener('click', region.el.chosen); }
+  });
+
   this.content.visible = false;
   this.attack_menu.destroy();
   this.field.removeChild(this.content);
