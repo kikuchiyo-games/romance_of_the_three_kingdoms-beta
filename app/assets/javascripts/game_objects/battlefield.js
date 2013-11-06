@@ -30,7 +30,16 @@ Battlefield = function(){
           type: 'foot',
           player: 'user',
           field: this.map.stage, 
-          general: new General({force: liu_bei})
+          troop_count: 85,
+          general: new General({
+            force: liu_bei,
+            surname: 'zhang',
+            given_name: 'fei',
+            loyalty: 100,
+            intelligence: 32,
+            leadership: 85,
+            war: 99
+          })
         }),         
         new Unit({
           force: liu_bei,
@@ -39,7 +48,16 @@ Battlefield = function(){
           type: 'foot',
           player: 'user',
           field: this.map.stage, 
-          general: new General({force: liu_bei})
+          troop_count: 85,
+          general: new General({
+            force: liu_bei,
+            surname: 'zhao',
+            given_name: 'yun',
+            loyalty: 100,
+            intelligence: 80,
+            leadership: 90,
+            war: 99
+          })
         }),
         new Unit({
           force: cao_cao,
@@ -48,7 +66,16 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          general: new General({force: cao_cao})
+          troop_count: 55,
+          general: new General({
+            force: cao_cao,
+            surname: 'zhang',
+            given_name: 'liao',
+            loyalty: 100,
+            intelligence: 85,
+            leadership: 95,
+            war: 91
+          })
         }),
         new Unit({
           force: cao_cao,
@@ -57,7 +84,16 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          general: new General({force: cao_cao})
+          troop_count: 95,
+          general: new General({
+            force: cao_cao,
+            surname: 'xun',
+            given_name: 'yu',
+            loyalty: 100,
+            intelligence: 95,
+            leadership: 90,
+            war: 51
+          })
         })
 
       ];

@@ -36,6 +36,8 @@ var UnitAnimation = function(options){
       this.unit.scout.rest();
 
       if(this.status == 'attacking'){
+        document.getElementById('sword_swing').currentTime=0;
+        document.getElementById('sword_swing').play();
         this.unit.scout.survey();
         var pid = this.unit.scout.closest_vacant_region_pid({close_menu: true});
         this.travel_to(pid);
