@@ -36,6 +36,8 @@
       }
       createjs.Ticker.setFPS(20);
       createjs.Ticker.addEventListener(stage);
+
+      this.stage.enableMouseOver(200);
     };
     
     this.initLayer = function(layerData, tilesetSheet, tilewidth, tileheight, stage) {
@@ -45,6 +47,7 @@
       App.hills = [];
       App.fortresses = [];
       App.water_regions = [];
+      App.other_regions = [];
     
       for ( var y = 0; y < layerData.height; y++) {
         for ( var x = 0; x < layerData.width; x++) {
@@ -66,6 +69,8 @@
             App.fortresses.push({x: cellBitmap.x, y: cellBitmap.y})
           } else if (layerData.data[idx] == 7){
             App.water_regions.push({x: cellBitmap.x, y: cellBitmap.y})
+          } else {
+            App.other_regions.push({x: cellBitmap.x, y: cellBitmap.y})
           }
     
           stage.addChild(cellBitmap);

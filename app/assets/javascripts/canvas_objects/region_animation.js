@@ -15,12 +15,19 @@ p.initialize = function(options){
   _.bindAll(this, 'close_attack_menu');
   this.Container_initialize();
   this.discoverer = options.discoverer;
-  this.alpha = 0.4;
+  this.active = options.active;
+  if(options.active){
+    this.alpha = 0.4;
+  } else { this.alpha = 0.0; }
+
   this.field = options.field
   background.graphics.beginFill(options.color).drawRoundRect(0, 0, width, height, 10);
   this.background = background;
   this.addChild(background);
-  this.addEventListener('click', this.chosen);
+  if(options.active == true){
+    this.addEventListener('click', this.chosen);
+    this.cursor = 'pointer';
+  }
 };
 
 p.chosen = function(event){
@@ -42,8 +49,10 @@ p.mark_enemy = function(unit){
   this.background = new createjs.Shape();
   this.background.graphics.beginFill('red').drawRoundRect(0, 0, 32, 32, 10)
   this.addChild(this.background);
-  this.removeEventListener('click', this.chosen);
-  this.addEventListener('click', this.open_attack_menu);
+  if(this.active){
+    this.removeEventListener('click', this.chosen);
+    this.addEventListener('click', this.open_attack_menu);
+  }
 };
 
 p.open_attack_menu = function(){
@@ -57,13 +66,6 @@ p.open_attack_menu = function(){
   $('#attack_menu .battlefield-officer-intelligence').html( general.intelligence );
   $('#attack_menu .battlefield-officer-leadership').html( general.leadership );
   $('#attack_menu .battlefield-officer-troops').html( Math.round(enemy.troop_count) );
-
-
-  //if (this.content != undefined){
-  //  this.container.removeChild(this.content);
-  //  delete this.container;
-  //  delete this.content;
-  //}
 
   this.container = new createjs.Container();
   this.field.addChild(this.container);

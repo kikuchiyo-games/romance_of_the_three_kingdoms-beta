@@ -27,18 +27,9 @@ var UnitAnimation = function(options){
   };
 
   this.go = function(region_pid){
-    var start_region = this.unit.scout.fetch_start_region().pid;
-    var end_region = this.unit.scout.paths.pi[region_pid];
-    var to = end_region;
-    var path = [region_pid];
-    console.log(this.unit.scout.paths);
-    while(this.unit.scout.paths.pi[to] != null){
-      path.push(to);
-      to = this.unit.scout.paths.pi[to];
-    }
-    
-    this.animate(path.reverse());
-  }
+    var path = this.unit.scout.construct_path_to(region_pid);
+    this.animate(path);
+  };
 
   this.animate = function(path){
     if( path.length == 0 ){ 
@@ -53,12 +44,14 @@ var UnitAnimation = function(options){
       }
       return; 
     }
+    var self = this, 
+      region_pid = path.shift(), 
+      region = this.unit.scout.fetch_region_by_pid(region_pid);
 
-    var self = this, region_pid = path.shift(), region = this.unit.scout.fetch_region_by_pid(region_pid);
     createjs.Tween.get(this.el).to({ x: region.x, y: region.y }, 100, createjs.Ease.linear ).call(function(){
       self.animate(path);
     });
-  }
+  };
 
   this.initialize(options);
 

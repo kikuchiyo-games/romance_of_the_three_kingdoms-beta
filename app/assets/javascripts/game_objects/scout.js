@@ -9,9 +9,29 @@ Scout = function(options){
     this.range = 3;
   };
 
+  this.construct_path_to = function(region_pid){
+    var start_region = this.fetch_start_region().pid;
+    var end_region = this.paths.pi[region_pid];
+    var to = end_region;
+    var path = [region_pid];
+
+    while(this.paths.pi[to] != null){
+      path.push(to);
+      to = this.paths.pi[to];
+    }
+    return path.reverse();
+  };
+
   this.validate_options = function(){
     if (!(options.general instanceof General)){ throw('Scout cannot be initialized without a General') }
     if (!(options.unit instanceof Unit)){ throw('Scout cannot be initialized without a Unit') }
+  };
+
+  this.survey_world = function(){
+    this.calculate_world_regions();
+    this.calculate_enemies();
+    this.calculate_neighbors();
+    this.calculate_paths();
   };
 
   this.survey = function(){
@@ -21,11 +41,25 @@ Scout = function(options){
     this.calculate_paths();
   };
 
-  this.closest_vacant_region_pid = function(){
-    var self = this, vacant_regions = _.filter(this.regions, function(region){
-      return region.el.residing_ally == undefined && region.el.residing_enemy == undefined && !(region.x == self.origin.el.x && region.y == self.origin.el.y) 
+  this.vacant_regions = function(){
+    var self = this;
+    return _.filter(this.regions, function(region){
+      return region.el.residing_ally == undefined && 
+        region.el.residing_enemy == undefined && 
+        !(region.x == self.origin.el.x && region.y == self.origin.el.y); 
     });
-    return _.min(vacant_regions, function(region){ return region.distance }).pid
+  }
+
+  this.enemy_populated_regions = function(){
+    return _.filter(this.regions, function(region){ return  region.el.residing_enemy != undefined });
+  }
+
+  this.closest_enemy_region_pid = function(){
+    return _.min(this.enemy_populated_regions(), function(region){ return region.distance }).pid
+  };
+
+  this.closest_vacant_region_pid = function(){
+    return _.min(this.vacant_regions(), function(region){ return region.distance }).pid
   };
 
   this.calculate_enemies = function(){
@@ -65,14 +99,26 @@ Scout = function(options){
     for(var row = -range; row <= range; row++){ x = this.origin.el.x + row * 32;
       for(var col = -range; col <= range; col++){ y = this.origin.el.y + col * 32;
         if (!this.mountain(x, y)){
-          this.add_region(x, y);
+          this.add_region(x, y, true);
         }
       }
     }
   };
 
-  this.add_region = function(x, y){
-    this.regions.push(new ScoutRegion({discoverer: this, field: this.field, x: x, y: y})); 
+  this.calculate_world_regions = function(){
+    var self = this;
+    this.regions = []; 
+    var range = this.range, x, y;
+    _.each(App.plains, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.forests, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.hills, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.fortresses, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.water_regions, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.other_regions, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+  };
+
+  this.add_region = function(x, y, active){
+    this.regions.push(new ScoutRegion({discoverer: this, field: this.field, x: x, y: y, active: active})); 
   };
 
   this.calculate_neighbors = function(){
@@ -87,6 +133,10 @@ Scout = function(options){
 
   this.fetch_region_by_pid = function(pid){
     return _.find(this.regions, function(region){return region.pid == pid;})
+  };
+
+  this.fetch_region_by_coordinates = function(x, y){
+    return _.find(this.regions, function(region){return region.x == x && region.y == y;})
   };
 
   this.calculate_paths = function(){

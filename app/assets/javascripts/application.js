@@ -68,6 +68,7 @@
 //= require canvas_objects/region_animation
 //= require canvas_objects/scout_region
 //= require game_objects/force
+//= require game_algorithms/cpu_turn
 //= require game_algorithms/neighbors
 //= require game_algorithms/dijkstra
 //= require game_objects/scout

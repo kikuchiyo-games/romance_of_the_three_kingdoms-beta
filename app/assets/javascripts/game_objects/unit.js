@@ -9,27 +9,32 @@ var Unit = function(options){
       position: options.position, 
       type: options.type
     });
+    this.player = options.player;
     this.force = options.force;
     this.general = options.general;
     this.scout = new Scout({world: options.world, general: this.general, unit: this, field: options.field})
   };
 
-  this.move = function(){
-
-  };
-
   this.attack = function(){
     this.move();
-    console.log('attack');
   };
 
   this.start_turn = function(){
-
+    if (this.player == 'user'){
+      this.scout.survey();
+    } else {
+      this.delegate_turn();
+    }
   };
 
-  this.stop_turn = function(){
-
+  this.delegate_turn = function(){
+    var self = this;
+    (new CPUTurn({unit: self})).go();
   };
+
+  // not needed...
+  this.move = function(){ };
+  this.stop_turn = function(){ };
 
   this.initialize(options);
   return this;

@@ -9,10 +9,7 @@ Battlefield = function(){
     }, 
 
     turn: function(){
-      this.active_unit.scout.survey();
-      var scout = this.active_unit.scout;
-      // this happens after user clicks a region...
-      //this.active_unit.animation.travel_to(scout.regions[0]);
+      this.active_unit.start_turn();
     },
 
     next: function(){
@@ -31,6 +28,7 @@ Battlefield = function(){
           position: {x: 128, y: 128},
           world: this, 
           type: 'foot',
+          player: 'user',
           field: this.map.stage, 
           general: new General({force: liu_bei})
         }),         
@@ -39,6 +37,7 @@ Battlefield = function(){
           position: {x: 640, y: 640},
           world: this, 
           type: 'foot',
+          player: 'user',
           field: this.map.stage, 
           general: new General({force: liu_bei})
         }),
@@ -47,6 +46,7 @@ Battlefield = function(){
           position: {x: 384, y: 384},
           world: this, 
           type: 'calvalry',
+          player: 'cpu',
           field: this.map.stage, 
           general: new General({force: cao_cao})
         }),
@@ -55,6 +55,7 @@ Battlefield = function(){
           position: {x: 448, y: 384},
           world: this, 
           type: 'calvalry',
+          player: 'cpu',
           field: this.map.stage, 
           general: new General({force: cao_cao})
         })

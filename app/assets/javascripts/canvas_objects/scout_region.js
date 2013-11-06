@@ -9,7 +9,7 @@ var ScoutRegion = function(options){
   };
 
   this.report = function(options){
-    this.el = this.field.addChild(new RegionAnimation({discoverer: options.discoverer, label: ' ', color: 'black', field: this.field, pid: this.pid}));
+    this.el = this.field.addChild(new RegionAnimation({discoverer: options.discoverer, label: ' ', color: 'black', field: this.field, pid: this.pid, active: options.active}));
     this.el.y = this.y;
     this.el.x = this.x;
     this.el.pid = this.pid;
