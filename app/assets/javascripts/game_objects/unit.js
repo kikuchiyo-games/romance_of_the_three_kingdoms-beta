@@ -11,6 +11,7 @@ var Unit = function(options){
     });
     this.player = options.player;
     this.force = options.force;
+    this.troop_count = options.troop_count;
     this.general = options.general;
     this.scout = new Scout({world: options.world, general: this.general, unit: this, field: options.field})
   };

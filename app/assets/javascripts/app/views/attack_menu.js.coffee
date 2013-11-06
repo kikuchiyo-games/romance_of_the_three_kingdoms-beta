@@ -11,7 +11,6 @@ class App.AttackMenu extends Backbone.View
     @unit = options.unit
     @container = '#attack_menu-container'
     @region_animation = options.region_animation
-    console.log(options.unit.general)
     $(@container).append($(_.template('#attack_menu-template', {general:options.unit.general})).html())
     @$el = $('#attack_menu')
     @delegateEvents()
@@ -20,31 +19,11 @@ class App.AttackMenu extends Backbone.View
   dual: (event)->
     alert('so you wanna dual eh?')
 
-
   close: (event)->
     @region_animation.close_attack_menu()
 
   charge: (event)->
     @region_animation.skirmish()
-    # alert('so you wanna charge eh?')
-    # path_id = parseInt($(event.currentTarget).attr('path_id'))
-
-    # @destination = null
-
-    # self = @
-
-    # _.each( self.battlefield.movement_buttons, ((button) ->
-    #   if button.path_id == path_id
-    #     self.destination = button
-    # ))
-
-    # @destination.attack()
-
-    # close menu
-    # move to enemy location - 1
-    # detuct points from each -> show sparkles?
-    # App.battlefield.ally_unit.move_to_enemy_location_but_stop_one_before()
-    # App.battlefield.ally_unit.move_to_enemy_location_but_stop_one_before()
 
   assault: (event)->
     alert('so you wanna assault eh?')
@@ -56,5 +35,4 @@ class App.AttackMenu extends Backbone.View
     $('#attack_menu').slideToggle()
     @undelegateEvents()
     @$el.removeData().unbind()
-    # @remove()
     Backbone.View.prototype.remove.call(@)

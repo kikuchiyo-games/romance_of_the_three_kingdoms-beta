@@ -27,8 +27,10 @@ p.initialize = function(options){
 
   this.field = options.field
   background.graphics.beginFill(options.color).drawRoundRect(0, 0, width, height, 10);
+
   this.background = background;
   this.addChild(background);
+
   if(options.active == true){
     this.addEventListener("tick", this.glow);
     this.addEventListener('click', this.chosen);
@@ -47,6 +49,7 @@ p.skirmish = function(){
 
 p.mark_ally = function(unit){
   this.residing_ally = unit;
+  this.removeEventListener('click', this.chosen);
 };
 
 p.glow = function(){
@@ -97,7 +100,7 @@ p.open_attack_menu = function(){
   this.container.addChild(this.content);
   this.container.x = enemy.animation.el.x + 30;
   this.container.y = enemy.animation.el.y;
-  this.container.alpha = 0.8;
+  this.container.alpha = 0.9;
 };
 
 p.mute = function(){

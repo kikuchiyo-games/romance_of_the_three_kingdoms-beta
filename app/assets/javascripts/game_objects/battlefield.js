@@ -63,7 +63,7 @@ Battlefield = function(){
         }),
         new Unit({
           force: cao_cao,
-          position: {x: 384, y: 384},
+          position: {x: 128, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',
@@ -82,7 +82,46 @@ Battlefield = function(){
         }),
         new Unit({
           force: cao_cao,
-          position: {x: 448, y: 384},
+          position: {x: 96, y: 384},
+          world: this, 
+          type: 'calvalry',
+          player: 'cpu',
+          field: this.map.stage, 
+          troop_count: 55,
+          general: new General({
+            force: cao_cao,
+            surname: 'zhang',
+            given_name: 'liao',
+            avatar: 'avatar-zhang_liao.jpeg',
+            loyalty: 100,
+            intelligence: 85,
+            leadership: 95,
+            war: 91
+          })
+        }),
+
+        new Unit({
+          force: cao_cao,
+          position: {x: 64, y: 384},
+          world: this, 
+          type: 'calvalry',
+          player: 'cpu',
+          field: this.map.stage, 
+          troop_count: 55,
+          general: new General({
+            force: cao_cao,
+            surname: 'zhang',
+            given_name: 'liao',
+            avatar: 'avatar-zhang_liao.jpeg',
+            loyalty: 100,
+            intelligence: 85,
+            leadership: 95,
+            war: 91
+          })
+        }),
+        new Unit({
+          force: cao_cao,
+          position: {x: 32, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',

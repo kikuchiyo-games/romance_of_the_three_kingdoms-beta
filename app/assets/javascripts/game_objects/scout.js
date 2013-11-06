@@ -68,16 +68,26 @@ Scout = function(options){
     return _.min(this.vacant_regions(), function(region){ return region.distance }).pid
   };
 
+  this.allies = function(){
+    var self = this;
+    return _.filter(this.world.units, function(unit){
+      return unit != self.unit && unit.force.name == self.unit.force.name
+    });
+  }; 
+
+  this.enemies = function(){
+    var self = this;
+    return _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name })
+  };
+
   this.calculate_enemies = function(){
     var self = this, 
       residing_enemy,
-      enemies = _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name }),
-      allies = _.filter(this.world.units, function(unit){
-        return unit != self.unit && unit.force.name == self.unit.force.name
-      }); 
+      enemies = this.enemies(),
+      allies =  this.allies();
+
     _.each(this.regions, function(region){
       residing_enemy = _.filter(enemies, function(enemy){return enemy.animation.el.x == region.x && enemy.animation.el.y == region.y});
-
       residing_ally = _.filter(allies, function(ally){return ally.animation.el.x == region.x && ally.animation.el.y == region.y});
       if(residing_enemy.length > 0){ region.el.mark_enemy(residing_enemy[0]); }
       if(residing_ally.length > 0){ region.el.mark_ally(residing_ally[0]); }
@@ -98,13 +108,21 @@ Scout = function(options){
     return mountain_region != undefined;
   };
 
+  this.vacant = function(x, y){
+    var allies = this.allies(),
+      vacancy = _.filter(allies, function(unit){
+        return unit.animation.el.x == x && unit.animation.el.y == y;
+      });
+    return vacancy.length == 0 ;
+  };
+
   this.calculate_regions = function(){
     var self = this;
     this.regions = []; 
     var range = this.range, x, y;
     for(var row = -range; row <= range; row++){ x = this.origin.el.x + row * 32;
       for(var col = -range; col <= range; col++){ y = this.origin.el.y + col * 32;
-        if (!this.mountain(x, y)){
+        if (!this.mountain(x, y) && this.vacant(x, y)){
           this.add_region(x, y, self.unit.player != 'cpu');
         }
       }
@@ -115,12 +133,12 @@ Scout = function(options){
     var self = this;
     this.regions = []; 
     var range = this.range, x, y;
-    _.each(App.plains, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.forests, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.hills, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.fortresses, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.water_regions, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
-    _.each(App.other_regions, function(coordinates){ self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.plains, function(coordinates){        if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.forests, function(coordinates){       if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.hills, function(coordinates){         if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.fortresses, function(coordinates){    if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.water_regions, function(coordinates){ if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
+    _.each(App.other_regions, function(coordinates){ if(self.vacant(coordinates.x, coordinates.y)) self.add_region(coordinates.x, coordinates.y, false); })
   };
 
   this.add_region = function(x, y, active){
