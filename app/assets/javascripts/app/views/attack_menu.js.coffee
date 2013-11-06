@@ -11,7 +11,8 @@ class App.AttackMenu extends Backbone.View
     @unit = options.unit
     @container = '#attack_menu-container'
     @region_animation = options.region_animation
-    $(@container).append($(_.template('#attack_menu-template', {})).html())
+    console.log(options.unit.general)
+    $(@container).append($(_.template('#attack_menu-template', {general:options.unit.general})).html())
     @$el = $('#attack_menu')
     @delegateEvents()
     @

@@ -75,6 +75,8 @@ p.open_attack_menu = function(){
   $('#attack_menu .battlefield-officer-intelligence').html( general.intelligence );
   $('#attack_menu .battlefield-officer-leadership').html( general.leadership );
   $('#attack_menu .battlefield-officer-troops').html( Math.round(enemy.troop_count) );
+  $('#attack_menu img.media-object').attr('src', 'assets/' + general.avatar);
+
 
   this.container = new createjs.Container();
   this.field.addChild(this.container);

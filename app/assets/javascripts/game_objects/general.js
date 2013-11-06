@@ -8,6 +8,7 @@
       this.surname = options.surname;
       this.given_name = options.given_name;
       this.loyalty = options.loyalty;
+      this.avatar = options.avatar;
     };
 
     this.initialize(options);
