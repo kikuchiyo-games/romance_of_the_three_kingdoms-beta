@@ -5,38 +5,34 @@ class App.AttackMenu extends Backbone.View
     'click [data-action="charge"]': 'charge'
     'click [data-action="assault"]': 'assault'
     'click [data-action="bribe"]': 'bribe'
+    'click [data-action="close"]': 'close'
 
-  initialize: ->
-    @battlefield = App.battlefield
+  initialize: (options)->
+    @unit = options.unit
+    @container = '#attack_menu-container'
+    @region_animation = options.region_animation
+    $(@container).append($(_.template('#attack_menu-template', {general:options.unit.general})).html())
+    @$el = $('#attack_menu')
+    @delegateEvents()
     @
 
   dual: (event)->
     alert('so you wanna dual eh?')
 
+  close: (event)->
+    @region_animation.close_attack_menu()
+
   charge: (event)->
-    path_id = parseInt($(event.currentTarget).attr('path_id'))
-    console.log "path_id = #{path_id}"
-
-    @destination = null
-
-    self = @
-
-    _.each( self.battlefield.movement_buttons, ((button) ->
-      console.log button.path_id
-      if button.path_id == path_id
-        self.destination = button
-    ))
-
-    @destination.attack()
-
-    # close menu
-    # move to enemy location - 1
-    # detuct points from each -> show sparkles?
-    # App.battlefield.ally_unit.move_to_enemy_location_but_stop_one_before()
-    # App.battlefield.ally_unit.move_to_enemy_location_but_stop_one_before()
+    @region_animation.skirmish()
 
   assault: (event)->
     alert('so you wanna assault eh?')
 
   bribe: (event)->
     alert('so you wanna bribe eh?')
+
+  destroy: ->
+    $('#attack_menu').slideToggle()
+    @undelegateEvents()
+    @$el.removeData().unbind()
+    Backbone.View.prototype.remove.call(@)

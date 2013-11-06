@@ -8,7 +8,7 @@
 <%= render :partial => '/templates/officers' %>
 <%= render :partial => '/templates/personel' %>
 <%= render :partial => '/templates/report' %>
-
+<%= render :partial => '/templates/attack_menu' %>
 <%= render :partial => '/shared/rotk_header' %>
 
 <div class='container'>
@@ -25,13 +25,14 @@
   </div>
 </div>
 
-<%if params['map'] == 'true' %>
+<%if params['map'] != 'false' %>
   <%= render :partial => 'map' %>
-  <%if params['sound'] == 'true' %>
+  <%if params['sound'] != 'false' %>
     <div class="audio-player">
-      <audio id="audio-player" src="assets/battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio>
+      <!--audio id="audio-player" src="assets/battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio-->
+      <audio id="audio-player" src="assets/motivational_battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio>
     </div>
   <%end%>
 <%end%>
 
-
+<audio id="sword_swing" src="assets/sword_swipe.mp3" type="audio/mp3"></audio>

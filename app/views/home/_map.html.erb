@@ -1,27 +1,6 @@
 <div id="game_container">
-  <div id="attack_menu" class='container' style="z-index: 1; position: absolute; background-color: black; color:#FFF; width:400px; height:200px; padding: 5px; visibility: hidden;">
-    <div class="media col-xs-12">
-      <a class="pull-left" href="#"> <img class="media-object img-circle" src="assets/avatar-zhang_fei.jpeg" alt="..."> </a>
-      <div class="media-body">
-        <h4 class="media-heading">officer: <span class='battlefield-officer'></span></h4>
-        <div class='span-xs-12'>war: <b class=battlefield-officer-war></b></div>
-        <div class='span-xs-12'>loyalty: <b class=battlefield-officer-loyalty></b></div>
-        <div class='span-xs-12'>intelligence: <b class=battlefield-officer-intelligence></b></div>
-        <div class='span-xs-12'>leadership: <b class=battlefield-officer-leadership></b></div>
-        <div class='span-xs-12'>troops: <b class=battlefield-officer-troops></b></div>
-      </div>
-    </div>
-    <br />
-    <button data-action='charge' width="100" type='button' class='btn'>charge</button>
-    <button data-action='assault' width="100" type='button' class='btn'>normal</button>
-    <button data-action='dual' width="100" type='button' class='btn'>dual</button>
-    <button data-action='bribe' width="100" type='button' class='btn'>bribe</button>
-    <button width="100" type='button' class='btn btn-danger' onclick="App.battlefield.close_attack_menu()">x</button>
-  </div>
-  <div id="enemy_troop_count" class='animated' style="z-index: 1; position: absolute; background-color: black; color:#FFF; width:40px; height:40px; padding: 5px; visibility: hidden;"> 
-    <span>100</span>
+  <div id="attack_menu-container" class='container' style="z-index: 1; position: absolute; visibility: hidden;">
   </div>
   <canvas id='game_map' width='800px' height='672px'>
   </canvas>
 </div>
-

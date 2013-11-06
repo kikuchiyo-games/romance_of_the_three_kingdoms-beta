@@ -1,3 +1,7 @@
+== Acknowledgments / Credits
+  sword swing - http://www.freesfx.co.uk/soundeffects/war_weapons/?p=1
+  battle themese - kongmings archives
+  
 == A Romance of Three Kingdoms
   A game to simulate the Three Kingdoms era of China.  
   Combine best parts from the popular series and other late eighties / early nineties and rpg / strategy games.

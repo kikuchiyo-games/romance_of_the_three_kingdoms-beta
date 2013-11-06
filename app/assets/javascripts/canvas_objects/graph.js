@@ -225,7 +225,9 @@ App.Graph = function(options){
       })
     });
   }
+
   this.shortest_path = function(button, paths_traveled){
   }
+
   return(this);
 }
