@@ -33,6 +33,12 @@ var UnitAnimation = function(options){
     this.animate(path);
   };
 
+  this.update_direction = function(x, y){
+    if(x < this.el.x){
+      this.el.gotoAndPlay('left');
+    } else if(x > this.el.x){ this.el.gotoAndPlay('right'); }
+  }
+
   this.animate = function(path){
     if( path.length == 0 ){ 
       this.unit.scout.rest();
@@ -51,6 +57,8 @@ var UnitAnimation = function(options){
     var self = this, 
       region_pid = path.shift(), 
       region = this.unit.scout.fetch_region_by_pid(region_pid);
+
+    this.update_direction(region.x, region.y);
 
     createjs.Tween.get(this.el).to({ x: region.x, y: region.y }, 100, createjs.Ease.linear ).call(function(){
       self.animate(path);
