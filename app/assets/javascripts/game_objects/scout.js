@@ -9,6 +9,12 @@ Scout = function(options){
     this.range = 3;
   };
 
+  this.hide_regions = function(){
+    _.each(this.regions, function(region){
+      region.el.mute();
+    });
+  };
+
   this.construct_path_to = function(region_pid){
     var start_region = this.fetch_start_region().pid;
     var end_region = this.paths.pi[region_pid];
@@ -99,7 +105,7 @@ Scout = function(options){
     for(var row = -range; row <= range; row++){ x = this.origin.el.x + row * 32;
       for(var col = -range; col <= range; col++){ y = this.origin.el.y + col * 32;
         if (!this.mountain(x, y)){
-          this.add_region(x, y, true);
+          this.add_region(x, y, self.unit.player != 'cpu');
         }
       }
     }

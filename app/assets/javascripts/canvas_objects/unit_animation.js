@@ -17,11 +17,13 @@ var UnitAnimation = function(options){
   }
 
   this.travel_to = function(region_pid){
+    this.unit.scout.hide_regions();
     this.status = 'traveling';
     this.go(region_pid);
   };
 
   this.attack = function(region_pid){
+    this.unit.scout.hide_regions();
     this.status = 'attacking';
     this.go(region_pid);
   };

@@ -13,11 +13,15 @@ p.initialize = function(options){
   _.bindAll(this, 'mark_enemy');
   _.bindAll(this, 'open_attack_menu');
   _.bindAll(this, 'close_attack_menu');
+  _.bindAll(this, 'glow');
+  _.bindAll(this, 'mute');
+
+  this.count = 0;
   this.Container_initialize();
   this.discoverer = options.discoverer;
   this.active = options.active;
 
-  if(options.active){
+  if(options.active == true){
     this.alpha = 0.4;
   } else { this.alpha = 0.0; }
 
@@ -26,6 +30,7 @@ p.initialize = function(options){
   this.background = background;
   this.addChild(background);
   if(options.active == true){
+    this.addEventListener("tick", this.glow);
     this.addEventListener('click', this.chosen);
     this.cursor = 'pointer';
   }
@@ -44,13 +49,17 @@ p.mark_ally = function(unit){
   this.residing_ally = unit;
 };
 
+p.glow = function(){
+  this.alpha = Math.max(Math.cos(this.count++ * 0.1) * 0.6, 0.4);
+};
+
 p.mark_enemy = function(unit){
   this.residing_enemy = unit;
   this.removeChild(this.background);
   this.background = new createjs.Shape();
   this.background.graphics.beginFill('red').drawRoundRect(0, 0, 32, 32, 10)
   this.addChild(this.background);
-  if(this.active){
+  if(this.active == true){
     this.removeEventListener('click', this.chosen);
     this.addEventListener('click', this.open_attack_menu);
   }
@@ -90,6 +99,11 @@ p.open_attack_menu = function(){
   this.container.y = enemy.animation.el.y;
   this.container.alpha = 0.8;
 };
+
+p.mute = function(){
+  this.alpha = 0;
+  this.removeEventListener('tick', this.glow);
+}
 
 p.close_attack_menu = function(){
   _.each(this.discoverer.regions, function(region){
