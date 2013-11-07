@@ -9,6 +9,7 @@ var Unit = function(options){
       position: options.position, 
       type: options.type
     });
+    this.uid = options.uid;
     this.player = options.player;
     this.force = options.force;
     this.troop_count = options.troop_count;
@@ -18,6 +19,10 @@ var Unit = function(options){
 
   this.attack = function(){
     this.move();
+  };
+
+  this.power = function(){
+    return Math.round(Math.log(Math.random(1) * this.general.war) + 1);
   };
 
   this.start_turn = function(){

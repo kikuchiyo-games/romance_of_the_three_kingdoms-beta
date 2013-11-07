@@ -39,15 +39,41 @@ var UnitAnimation = function(options){
     } else if(x > this.el.x){ this.el.gotoAndPlay('right'); }
   }
 
+  this.violence = function(pid){
+    document.getElementById('sword_swing').currentTime=0;
+    document.getElementById('sword_swing').play();
+    var enemy = this.unit.scout.fetch_region_by_pid(pid).el.residing_enemy;
+    this.wet(enemy);
+  };
+
+  this.wet = function(unit){
+    var force, inertia, count = this.unit.troop_count,
+      deaths = 0, murders = 0;
+    
+    for(var i = 0; i < count; i++){
+      force = this.unit.power();
+      inertia = unit.power();
+      if (force > inertia && unit.power() < this.unit.power() ){
+        unit.troop_count--;
+      } else if (inertia > force && unit.power() < this.unit.power()){
+        this.unit.troop_count--;
+      }
+    }
+
+    if(unit.troop_count < 0){
+      this.world.remove(unit);
+    }
+
+  };
+
   this.animate = function(path){
     if( path.length == 0 ){ 
       this.unit.scout.rest();
 
       if(this.status == 'attacking'){
-        document.getElementById('sword_swing').currentTime=0;
-        document.getElementById('sword_swing').play();
         this.unit.scout.survey();
         var pid = this.unit.scout.closest_vacant_region_pid({close_menu: true});
+        //this.violence(pid)
         this.travel_to(pid);
       } else {
         this.world.next(); 
@@ -59,6 +85,14 @@ var UnitAnimation = function(options){
       region = this.unit.scout.fetch_region_by_pid(region_pid);
 
     this.update_direction(region.x, region.y);
+
+    if(region.el.residing_enemy != undefined){
+      this.violence(region_pid);
+      if(this.unit.troop_count < 0){
+        delete this.unit;
+        return;
+      }
+    }
 
     createjs.Tween.get(this.el).to({ x: region.x, y: region.y }, 100, createjs.Ease.linear ).call(function(){
       self.animate(path);

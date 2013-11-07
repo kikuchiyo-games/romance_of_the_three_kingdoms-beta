@@ -21,11 +21,19 @@ Battlefield = function(){
       this.turn();
     },
 
+    remove: function(unit){
+      var self = this, index;
+      this.units = _.filter(this.units, function(u, i){ return u.uid != unit.uid });
+      this.map.stage.removeChild(unit.animation.el);
+      delete this.units[index];
+    },
+
     populate: function(){
       var cao_cao = new Force({name: 'Cao Cao'});
       var liu_bei = new Force({name: 'Liu Bei'});
       this.units = [
         new Unit({
+          uid: 1,
           force: liu_bei,
           position: {x: 128, y: 128},
           world: this, 
@@ -45,6 +53,7 @@ Battlefield = function(){
           })
         }),         
         new Unit({
+          uid: 2,
           force: liu_bei,
           position: {x: 640, y: 640},
           world: this, 
@@ -64,13 +73,14 @@ Battlefield = function(){
           })
         }),
         new Unit({
+          uid: 3,
           force: cao_cao,
           position: {x: 128, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 55,
+          troop_count: 5,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -83,13 +93,14 @@ Battlefield = function(){
           })
         }),
         new Unit({
+          uid: 4,
           force: cao_cao,
           position: {x: 96, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 55,
+          troop_count: 5,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -103,13 +114,14 @@ Battlefield = function(){
         }),
 
         new Unit({
+          uid: 5,
           force: cao_cao,
           position: {x: 64, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 55,
+          troop_count: 5,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -122,13 +134,14 @@ Battlefield = function(){
           })
         }),
         new Unit({
+          uid: 6,
           force: cao_cao,
           position: {x: 32, y: 384},
           world: this, 
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 95,
+          troop_count: 5,
           general: new General({
             force: cao_cao,
             surname: 'xun',
@@ -140,8 +153,8 @@ Battlefield = function(){
             war: 51
           })
         })
-
       ];
+
       this.active_unit_index = 0;
       this.active_unit = this.units[this.active_unit_index];
     }

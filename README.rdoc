@@ -13,12 +13,7 @@
   bundle exec rake db:create db:migrate
   bundle exec rails s
 
-== PROGRESS
-  set up responsive ui with stubbed out data for most views that do not require a map
-  to get a feel for possible ui/ux
-  validate checkboxes on officer selects in forms
-
-== NEXT UP TODOS
+== TODOS IN QUEUE
   ux -> on a users turn (currently always on)
     BETTER UX: user will observe provinces from a map and select province, perform actions and indicate when done with their turn?
     2. user will perform province activities and go on to next province once done?
@@ -27,7 +22,7 @@
   existing views should be province/show controller/actions
 
 == POSSIBLE TECHNOLOGIES
-  RPGjs looks nice ( http://rpgjs.com/ ) for:
+  CreateJS for: 
     dualing in battle
     kidnapping
     prison breaks

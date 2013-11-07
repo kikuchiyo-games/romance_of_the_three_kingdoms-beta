@@ -23,16 +23,17 @@
       </div>
     </div>
   </div>
-</div>
-
-<%if params['map'] != 'false' %>
-  <%= render :partial => 'map' %>
-  <%if params['sound'] != 'false' %>
-    <div class="audio-player">
-      <!--audio id="audio-player" src="assets/battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio-->
-      <audio id="audio-player" src="assets/motivational_battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio>
-    </div>
+  <%if params['map'] != 'false' %>
+    <%= render :partial => 'map' %>
+    <%if params['sound'] != 'false' %>
+      <div class="audio-player">
+        <!--audio id="audio-player" src="assets/battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio-->
+        <audio id="audio-player" src="assets/motivational_battle_theme.mp3" type="audio/mp3" autoplay loop='loop'></audio>
+      </div>
+    <%end%>
   <%end%>
-<%end%>
+
+
+</div>
 
 <audio id="sword_swing" src="assets/sword_swipe.mp3" type="audio/mp3"></audio>
