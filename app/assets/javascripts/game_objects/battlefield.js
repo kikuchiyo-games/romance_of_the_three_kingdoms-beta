@@ -15,6 +15,7 @@ Battlefield = function(){
     },
 
     next: function(){
+      if (this.game_over == true){return;}
       this.active_unit_index++;
       if (this.active_unit_index > this.units.length - 1){ this.active_unit_index = 0; }
       this.active_unit = this.units[this.active_unit_index];
@@ -26,6 +27,32 @@ Battlefield = function(){
       this.units = _.filter(this.units, function(u, i){ return u.uid != unit.uid });
       this.map.stage.removeChild(unit.animation.el);
       delete this.units[index];
+
+      if (this.player_units().length == 0){
+        this.game_over = true;
+        document.getElementById('audio-player').setAttribute('src', 'assets/defeat_in_battle.mp3');
+        // stop battle music
+        // play defeat music
+        // exit the battlefield in five seconds
+      } else if (this.cpu_units().length == 0){
+        this.game_over = true;
+        document.getElementById('audio-player').setAttribute('src', 'assets/victory_in_battle.mp3');
+        // stop battle music
+        // play victory music
+        // exit the battlefield in five seconds
+      }
+    },
+
+    player_units: function(){
+      var units = _.filter(this.units, function(unit){return unit.player == 'user'});
+      console.log(units);
+      return units;
+    },
+
+    cpu_units: function(){
+      var units = _.filter(this.units, function(unit){return unit.player == 'cpu'});
+      console.log(units);
+      return units;
     },
 
     populate: function(){
@@ -40,7 +67,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'user',
           field: this.map.stage, 
-          troop_count: 85,
+          troop_count: 1000,
           general: new General({
             force: liu_bei,
             surname: 'zhang',
@@ -60,7 +87,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'user',
           field: this.map.stage, 
-          troop_count: 85,
+          troop_count: 100,
           general: new General({
             force: liu_bei,
             surname: 'zhao',
@@ -80,7 +107,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 5,
+          troop_count: 1,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -100,7 +127,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 5,
+          troop_count: 1,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -121,7 +148,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 5,
+          troop_count: 1,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -141,7 +168,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 5,
+          troop_count: 1,
           general: new General({
             force: cao_cao,
             surname: 'xun',

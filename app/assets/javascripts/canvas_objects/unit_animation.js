@@ -60,7 +60,7 @@ var UnitAnimation = function(options){
       }
     }
 
-    if(unit.troop_count < 0){
+    if(unit.troop_count <= 0){
       this.world.remove(unit);
     }
 
@@ -73,13 +73,13 @@ var UnitAnimation = function(options){
       if(this.status == 'attacking'){
         this.unit.scout.survey();
         var pid = this.unit.scout.closest_vacant_region_pid({close_menu: true});
-        //this.violence(pid)
         this.travel_to(pid);
-      } else {
-        this.world.next(); 
-      }
+
+      } else { this.world.next(); }
+
       return; 
     }
+
     var self = this, 
       region_pid = path.shift(), 
       region = this.unit.scout.fetch_region_by_pid(region_pid);
@@ -87,8 +87,10 @@ var UnitAnimation = function(options){
     this.update_direction(region.x, region.y);
 
     if(region.el.residing_enemy != undefined){
+
       this.violence(region_pid);
-      if(this.unit.troop_count < 0){
+
+      if(this.unit.troop_count <= 0){
         delete this.unit;
         return;
       }
