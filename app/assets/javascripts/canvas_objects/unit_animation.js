@@ -91,7 +91,8 @@ var UnitAnimation = function(options){
       this.violence(region_pid);
 
       if(this.unit.troop_count <= 0){
-        delete this.unit;
+        this.world.remove(this.unit);
+        this.world.next();
         return;
       }
     }

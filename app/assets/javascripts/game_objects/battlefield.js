@@ -27,6 +27,7 @@ Battlefield = function(){
       this.units = _.filter(this.units, function(u, i){ return u.uid != unit.uid });
       this.map.stage.removeChild(unit.animation.el);
       delete this.units[index];
+      delete unit;
 
       if (this.player_units().length == 0){
         this.game_over = true;
@@ -45,13 +46,11 @@ Battlefield = function(){
 
     player_units: function(){
       var units = _.filter(this.units, function(unit){return unit.player == 'user'});
-      console.log(units);
       return units;
     },
 
     cpu_units: function(){
       var units = _.filter(this.units, function(unit){return unit.player == 'cpu'});
-      console.log(units);
       return units;
     },
 
