@@ -81,17 +81,37 @@ Battlefield = function(){
         new Unit({
           uid: 2,
           force: liu_bei,
-          position: {x: 640, y: 640},
+          position: {x: 128, y: 160},
           world: this, 
           type: 'calvalry',
           player: 'user',
           field: this.map.stage, 
-          troop_count: 100,
+          troop_count: 1000,
           general: new General({
             force: liu_bei,
             surname: 'zhao',
             given_name: 'yun',
-            avatar: 'avatar-zhao_yun.jpeg',
+            avatar: 'avatar-zhao_yun.jpg',
+            loyalty: 100,
+            intelligence: 80,
+            leadership: 90,
+            war: 99
+          })
+        }),
+        new Unit({
+          uid: 2,
+          force: liu_bei,
+          position: {x: 128, y: 192},
+          world: this, 
+          type: 'calvalry',
+          player: 'user',
+          field: this.map.stage, 
+          troop_count: 1000,
+          general: new General({
+            force: liu_bei,
+            surname: 'guan',
+            given_name: 'yu',
+            avatar: 'avatar-guan_yu.jpg',
             loyalty: 100,
             intelligence: 80,
             leadership: 90,
@@ -106,7 +126,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 1,
+          troop_count: 1000,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -126,7 +146,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 1,
+          troop_count: 1000,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -147,7 +167,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 1,
+          troop_count: 1000,
           general: new General({
             force: cao_cao,
             surname: 'zhang',
@@ -167,7 +187,7 @@ Battlefield = function(){
           type: 'calvalry',
           player: 'cpu',
           field: this.map.stage, 
-          troop_count: 1,
+          troop_count: 1000,
           general: new General({
             force: cao_cao,
             surname: 'xun',

@@ -71,7 +71,7 @@ Scout = function(options){
   this.allies = function(){
     var self = this;
     return _.filter(this.world.units, function(unit){
-      return unit != self.unit && unit.force.name == self.unit.force.name
+      return unit !== self.unit && unit.force.name == self.unit.force.name
     });
   }; 
 
@@ -79,7 +79,7 @@ Scout = function(options){
     var self = this;
     return _.filter(this.world.units, function(unit){return unit.force.name != self.unit.force.name })
   };
-
+  
   this.calculate_enemies = function(){
     var self = this, 
       residing_enemy,
@@ -87,10 +87,20 @@ Scout = function(options){
       allies =  this.allies();
 
     _.each(this.regions, function(region){
-      residing_enemy = _.filter(enemies, function(enemy){return enemy.animation.el.x == region.x && enemy.animation.el.y == region.y});
-      residing_ally = _.filter(allies, function(ally){return ally.animation.el.x == region.x && ally.animation.el.y == region.y});
-      if(residing_enemy.length > 0){ region.el.mark_enemy(residing_enemy[0]); }
-      if(residing_ally.length > 0){ region.el.mark_ally(residing_ally[0]); }
+      residing_enemy = _.filter(enemies, function(enemy){
+        return enemy.animation.el.x == region.x && enemy.animation.el.y == region.y
+      });
+      residing_ally = _.filter(allies, function(ally){
+        return ally.animation.el.x == region.x && ally.animation.el.y == region.y
+      });
+      //console.log(residing_ally)
+      if(residing_enemy.length > 0){ 
+        region.el.mark_enemy(residing_enemy[0]); 
+      } else if(residing_ally.length > 0){ 
+        region.el.mark_ally(residing_ally[0]); 
+      } else if(region.x == self.unit.animation.el.x && region.y == self.unit.animation.el.y){
+        region.el.mark_self(self.unit);
+      }
     });
   };
 
@@ -135,7 +145,11 @@ Scout = function(options){
   };
 
   this.valid_region = function(x, y){
-    return !this.mountain(x, y) && this.vacant(x, y) && this.on_field(x, y);
+    if(this.unit.player == 'cpu'){
+      return !this.mountain(x, y) && this.vacant(x, y) && this.on_field(x, y);
+    } else {
+      return !this.mountain(x, y) && this.on_field(x, y);
+    }
   };
 
   this.calculate_world_regions = function(){

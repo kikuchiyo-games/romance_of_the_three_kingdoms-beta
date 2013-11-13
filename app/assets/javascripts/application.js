@@ -27,6 +27,7 @@
 //= require app/views/development
 //= require app/views/diplomacy
 //= require app/views/attack_menu
+//= require app/views/unit_info
 //= require app/views/report
 
 // EaselJS

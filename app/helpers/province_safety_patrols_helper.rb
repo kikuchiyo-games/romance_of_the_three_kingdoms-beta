@@ -1,0 +1,2 @@
+module ProvinceSafetyPatrolsHelper
+end

@@ -1,0 +1,2 @@
+module ProvinceFirePreventionsHelper
+end

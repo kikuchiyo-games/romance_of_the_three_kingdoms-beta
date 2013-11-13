@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021185641) do
+ActiveRecord::Schema.define(:version => 20131111234734) do
 
   create_table "game_officers", :force => true do |t|
     t.string   "surname"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20131021185641) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "game_id"
+    t.integer  "population"
   end
 
   add_index "game_provinces", ["game_id"], :name => "game_id_ix"
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20131021185641) do
     t.integer  "troops"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "population"
   end
 
   create_table "users", :force => true do |t|

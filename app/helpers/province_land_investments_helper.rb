@@ -1,0 +1,2 @@
+module ProvinceLandInvestmentsHelper
+end

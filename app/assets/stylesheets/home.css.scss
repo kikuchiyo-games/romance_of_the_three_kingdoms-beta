@@ -8,14 +8,7 @@
 @import url("maps.css.scss");
 
 body {
-  //background-image:url('Soft-silver-clouds.jpg');
-  //background-color:black;
-  #game_container {
-    //margin: 0;
-    //background-image: url('paper.jpg');
-  }
-
-  #attack_menu-container {
+  #unit_menu-container, #attack_menu-container {
     background-color: rgba(0, 0, 0, 0.3);
     background: black;
     color:#FFF;
@@ -24,11 +17,11 @@ body {
     padding: 5px; 
   }
 
-  #attack_menu {
+  #unit_menu, #attack_menu {
     background-color: rgba(0, 0, 0, 0.7);
   }
 
-  #attack_menu * {
+  #unit_menu *, #attack_menu * {
     font-family: 'Star Jedi';
   }
 
