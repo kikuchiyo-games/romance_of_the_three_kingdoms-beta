@@ -38,19 +38,20 @@ class App.CivilView extends App.FormView
       App.nav_view.sub_views['report'].report_resource_details(increase: 'gold reserves', decrease: 'the people\'s loyalty', decreased_by: '10%', increased_by: @taxed_amount(value), messanger: @fake_generals[0])
 
   patrol: ->
+    self = @
     if @verify_form('na', null)
       @render()
       generals = []
       _.each(@assigned_generals, (general)->
         generals.push(parseInt($(general).attr('data-value')))
       )
-      console.log generals
+
       $.ajax({
         type: 'PUT',
         url: '/game_provinces/1/prevent_crime',
         data: {generals: generals},
         success: (data) ->
-          App.nav_view.sub_views['report'].standard_report(type: data.status, subject: 'patroling for the people was successful!', message: data.message, messanger: @fake_generals[0])
+          App.nav_view.sub_views['report'].standard_report(type: data.status, subject: 'patroling for the people was successful!', message: data.message, messanger: self.fake_generals[0])
         error: (data) ->
           alert('death')
 
