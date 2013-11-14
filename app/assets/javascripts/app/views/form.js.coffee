@@ -7,9 +7,10 @@ class App.FormView extends Backbone.View
     return false
 
   verify_form: (type, value) ->
-    if !@verify_input('integer', value)
+    if type == 'integer' and !@verify_input('integer', value)
       App.nav_view.sub_views['report'].invalid_input('integer', value)
     else if !@general_is_selected()
+      console.log 'abc123'
       App.nav_view.sub_views['report'].no_general_selected()
     else
       return true
@@ -21,7 +22,8 @@ class App.FormView extends Backbone.View
       console.log($(this).attr('data-value'))
 
   general_is_selected: (type, value) ->
-    return $('#view-content input:checked').length != 0
+    @assigned_generals = $('#view-content input:checked')
+    return @assigned_generals.length != 0
 
   list_generals_actions: (template, action, attribute)->
     if !attribute.match /intelligence|charm|war|politics/
@@ -47,9 +49,9 @@ class App.FormView extends Backbone.View
 
   open_info_dialog: (options)->
     action = options.action.split('_').join(' ')
-    App.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?")
+    App.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?", messanger: @fake_generals[0])
     if options.details?
-      $("##{@view_name}_details").html(_.template($("##{@view_name}-details-template").html(), {details: options.details}))
+      $("##{@view_name}_details").html(_.template($("##{@view_name}-details-template").html(), {details: options.details, messanger: @fake_generals[0]}))
 
   open_general_assignment_form: (event)->
     action = $(event.currentTarget).attr('data-action')

@@ -3,8 +3,11 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'rails', '3.2.12'
-
 gem 'mysql2'
+
+group :test, :development do
+  gem 'debugger'
+end
 
 group :test do
   gem 'jasmine'

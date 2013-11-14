@@ -1,7 +1,7 @@
 var UnitAnimation = function(options){
   this.initialize = function(options){
     this.data = {
-      images: ["assets/" + options.type + "-unit-sprite-sheet.png"],
+      images: ["/assets/" + options.type + "-unit-sprite-sheet.png"],
       frames: {width:32, height:32},
       animations: {left:[0], right:[1]}
     };

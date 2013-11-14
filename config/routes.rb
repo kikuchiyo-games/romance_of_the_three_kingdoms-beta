@@ -2,12 +2,20 @@ RomanceOfTheThreeKingdoms::Application.routes.draw do
 
   root :to => 'home#index'
 
-  scope 'game_provinces' do
-    match 'prevent_crime'  => 'province_safety_patrols#update'
-    match 'prevent_famine' => 'province_land_investments#update'
-    match 'prevent_fire'   => 'province_fire_preventions#update'
-    match 'prevent_flood'  => 'province_flood_preventions#update'
+  resources 'game_provinces' do
+    match 'prevent_crime'  => 'game_provinces/province_safety_patrols#update'
+    match 'prevent_famine' => 'game_provinces/province_land_investments#update'
+    match 'prevent_fire'   => 'game_provinces/province_fire_preventions#update'
+    match 'prevent_flood'  => 'game_provinces/province_flood_preventions#update'
+    match 'province_generals'  => 'game_provinces/province_generals#index'
   end
+
+  # scope 'game_provinces' do
+  #   match 'prevent_crime'  => 'game_provinces/province_safety_patrols#update'
+  #   match 'prevent_famine' => 'province_land_investments#update'
+  #   match 'prevent_fire'   => 'province_fire_preventions#update'
+  #   match 'prevent_flood'  => 'province_flood_preventions#update'
+  # end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

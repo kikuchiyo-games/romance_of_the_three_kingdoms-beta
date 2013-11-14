@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe ProvinceSafetyPatrolsController do
+describe GameProvinces::ProvinceSafetyPatrolsController do
   before :each do
-    @province = FactoryGirl.create(:province)
-    @general = FactoryGirl.create(:officer)
+    @province = FactoryGirl.create(:game_province)
+    @general = FactoryGirl.create(:zhang_liao)
   end
    
   it "has an update action" do
@@ -11,7 +11,7 @@ describe ProvinceSafetyPatrolsController do
     lambda{ get :update, {game_province_id: @province.id, generals: [@general.id]} }.should_not raise_error
 
     # @province does not update after the save, so I have to reset it...
-    @province = Province.find(@province.id)
+    @province = GameProvince.find(@province.id)
     ( @province.safety > 10 ).should be_true
   end 
 end 

@@ -4,7 +4,7 @@
       this.stage = new createjs.Stage("game_map"),
       this.mapData =  new MapData();
       this.tileset = new Image();
-      this.tileset.src = this.mapData.json.tilesets[0].image;
+      this.tileset.src = '/' + this.mapData.json.tilesets[0].image;
       this.tileset.onLoad = this.initLayers(); 
       createjs.Ticker.addEventListener("tick", this.stage);
     };

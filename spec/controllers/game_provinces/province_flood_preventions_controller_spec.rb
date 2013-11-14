@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProvinceFloodPreventionsController do
+describe GameProvinces::ProvinceFloodPreventionsController do
   before :each do
     @province = FactoryGirl.create(:province)
     @general = FactoryGirl.create(:officer)

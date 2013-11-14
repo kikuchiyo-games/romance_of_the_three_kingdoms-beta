@@ -21,7 +21,7 @@ $(document).ready ->
 
   $('[data-toggle="tooltip"]').tooltip()
 
-  require ['assets/canvas_objects/test_map.js'], ((MapData) ->
+  require ['/assets/canvas_objects/test_map.js'], ((MapData) ->
     App.battlefield = new Battlefield()
     App.battlefield.initialize()
   )

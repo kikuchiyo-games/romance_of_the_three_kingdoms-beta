@@ -14,22 +14,22 @@ class App.ReportView extends Backbone.View
     else
       type = 'info'
 
-    $('#view-content').prepend(_.template($('#report-request-info-template').html(), {type: type, subject: options.subject, message: options.message}))
+    $('#view-content').prepend(_.template($('#report-request-info-template').html(), {type: type, subject: options.subject, message: options.message, messanger: options.messanger}))
 
   request_action: (options)->
     $('#report-index').remove()
-    $('#view-content').prepend(_.template($('#report-action-required-template').html(), {type: 'danger', message: options.message}))
+    $('#view-content').prepend(_.template($('#report-action-required-template').html(), {type: 'danger', message: options.message, messanger: options.messanger}))
   
   standard_report: (options)->
     $('#report-index').remove()
-    $('#view-content').prepend(_.template($('#report-index-template').html(), {type: options.type, message: options.message}))
+    $('#view-content').prepend(_.template($('#report-index-template').html(), {type: options.type, message: options.message, messanger: options.messanger}))
 
   report_details: (options)->
     $('#report-details-container').remove()
     $('#view-content').prepend(_.template( $( '#report-details-container-template' ).html(), { } ) )
 
     for detail in options
-      $('#report-details-container').prepend(_.template($('#report-details-item-template').html(), {type: detail.type, message: detail.message, subject: detail.subject}))
+      $('#report-details-container').prepend(_.template($('#report-details-item-template').html(), {type: detail.type, message: detail.message, subject: detail.subject, messanger: options.messanger}))
 
   close_details: ->
     $(@el).find('#report-details-container').addClass('bounceOut')
@@ -38,14 +38,14 @@ class App.ReportView extends Backbone.View
     $(@el).find('.report-view').addClass('flipOutX')
 
   invalid_input: (type, value)->
-    @report_details([{ type: 'danger', subject: 'invalid input', message: "\"#{value}\" is not an #{type}" }])
+    @report_details([{ type: 'danger', subject: 'invalid input', message: "\"#{value}\" is not an #{type}", messanger: options.messanger }])
 
   no_general_selected: ->
-    @report_details([{ type: 'danger', subject: 'invalid input', message: "select one or more generals to carry out the task" }])
+    @report_details([{ type: 'danger', subject: 'invalid input', message: "select one or more generals to carry out the task", messanger: options.messanger }])
 
   report_resource_details: (options) ->
     @report_details([
-      { type: 'warning', subject: "#{options.decrease} decreased!", message: "#{options.decrease} decreased by #{options.decreased_by}" },
-      { type: 'success', subject: "#{options.increase} increased!", message: "#{options.increase} increased by #{options.increased_by}" }
+      { type: 'warning', subject: "#{options.decrease} decreased!", message: "#{options.decrease} decreased by #{options.decreased_by}", messanger: options.messanger },
+      { type: 'success', subject: "#{options.increase} increased!", message: "#{options.increase} increased by #{options.increased_by}", messanger: options.messanger }
     ])
 

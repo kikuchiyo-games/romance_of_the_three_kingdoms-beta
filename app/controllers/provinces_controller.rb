@@ -1,2 +1,0 @@
-class ProvincesController < ApplicationController
-end

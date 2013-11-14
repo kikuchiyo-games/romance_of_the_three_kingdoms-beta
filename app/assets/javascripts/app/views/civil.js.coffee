@@ -12,10 +12,10 @@ class App.CivilView extends App.FormView
     @view_attribute = 'charm'
 
     @fake_generals = [
-      { id: 1, charm: '18%', leadership: '95%', name: 'lu bu', war: '100%', avatar: 'assets/avatar-lu_bu.jpeg' },
-      { id: 2, charm: '95%', leadership: '98%', name: 'cao cao', war: '90%', avatar: 'assets/avatar-cao_cao.jpg' },
-      { id: 3, charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
-      { id: 8, charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
+      { id: 1, charm: '18%', leadership: '95%', name: 'lu bu', war: '100%', avatar: '/assets/avatar-lu_bu.jpeg' },
+      { id: 2, charm: '95%', leadership: '98%', name: 'cao cao', war: '90%', avatar: '/assets/avatar-cao_cao.jpg' },
+      { id: 3, charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: '/assets/avatar-zhang_liao.jpeg' },
+      { id: 8, charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: '/assets/avatar-xun-yu.jpeg'  }
     ]
     @
 
@@ -23,23 +23,38 @@ class App.CivilView extends App.FormView
     value = $('#civil_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'rice reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%', messanger: @fake_generals[0])
 
   give_gold: ->
     value = $('#civil_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%')
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'the people\'s loyalty', decreased_by: value, increased_by: '5%', messanger: @fake_generals[0])
 
   tax: ->
     value = $('#civil_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(increase: 'gold reserves', decrease: 'the people\'s loyalty', decreased_by: '10%', increased_by: @taxed_amount(value))
+      App.nav_view.sub_views['report'].report_resource_details(increase: 'gold reserves', decrease: 'the people\'s loyalty', decreased_by: '10%', increased_by: @taxed_amount(value), messanger: @fake_generals[0])
 
   patrol: ->
-    @render()
-    App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'patroling for the people was successful!', message: "public safety has increased by 10%")
+    if @verify_form('na', null)
+      @render()
+      generals = []
+      _.each(@assigned_generals, (general)->
+        generals.push(parseInt($(general).attr('data-value')))
+      )
+      console.log generals
+      $.ajax({
+        type: 'PUT',
+        url: '/game_provinces/1/prevent_crime',
+        data: {generals: generals},
+        success: (data) ->
+          App.nav_view.sub_views['report'].standard_report(type: data.status, subject: 'patroling for the people was successful!', message: data.message, messanger: @fake_generals[0])
+        error: (data) ->
+          alert('death')
+
+      })
 
   taxed_amount: (tax_rate) ->
     # temporary population setting

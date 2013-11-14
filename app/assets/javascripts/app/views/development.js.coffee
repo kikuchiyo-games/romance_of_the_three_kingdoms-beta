@@ -11,11 +11,25 @@ class App.DevelopmentView extends App.FormView
     _.bindAll @, ['render']
     @view_name = 'development'
     @view_attribute = 'intelligence'
+    @fake_generals = []
+    self = @
 
-    @fake_generals = [
-      { intelligence: '85%', charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
-      { intelligence: '95%', charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
-    ]
+    $.ajax(
+      type: 'GET',
+      url: '/game_provinces/1/province_generals'
+      success: (data)->
+        _.each( data.generals, ((general)->
+          self.fake_generals.push(general)
+        ))
+        console.log(self.fake_generals)
+      error: (data)->
+        alert('death')
+    )
+      # @fake_generals = [
+      #   { intelligence: '85%', charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
+      #   { intelligence: '95%', charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
+      # ]
+
     @
 
   land_invest: ->
