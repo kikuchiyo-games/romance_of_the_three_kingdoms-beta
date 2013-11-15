@@ -8,10 +8,10 @@ class App.FormView extends Backbone.View
 
   verify_form: (type, value) ->
     if type == 'integer' and !@verify_input('integer', value)
-      App.nav_view.sub_views['report'].invalid_input('integer', value)
+      App.nav_view.sub_views['report'].invalid_input('integer', value, @fake_generals[0])
     else if !@general_is_selected()
       console.log 'abc123'
-      App.nav_view.sub_views['report'].no_general_selected()
+      App.nav_view.sub_views['report'].no_general_selected( @fake_generals[0] )
     else
       return true
 
@@ -49,9 +49,9 @@ class App.FormView extends Backbone.View
 
   open_info_dialog: (options)->
     action = options.action.split('_').join(' ')
-    App.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?", messanger: @fake_generals[0])
+    App.nav_view.sub_views['report'].request_info(subject: "#{action}", message: "who will #{action}?", messenger: @fake_generals[0])
     if options.details?
-      $("##{@view_name}_details").html(_.template($("##{@view_name}-details-template").html(), {details: options.details, messanger: @fake_generals[0]}))
+      $("##{@view_name}_details").html(_.template($("##{@view_name}-details-template").html(), {details: options.details, messenger: @fake_generals[0]}))
 
   open_general_assignment_form: (event)->
     action = $(event.currentTarget).attr('data-action')
