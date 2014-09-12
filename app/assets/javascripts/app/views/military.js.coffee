@@ -14,8 +14,8 @@ class App.MilitaryView extends App.FormView
     @view_name = 'military'
 
     @fake_generals = [
-      { charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: 'assets/avatar-zhang_liao.jpeg' },
-      { charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: 'assets/avatar-xun-yu.jpeg'  }
+      { charm: '80%', leadership: '95%', name: 'zhang liao', war: '91%', avatar: '/assets/avatar-zhang_liao.jpeg' },
+      { charm: '90%', leadership: '90%', name: 'xun yu', war: '50%', avatar: '/assets/avatar-xun-yu.jpeg'  }
     ]
     @
 

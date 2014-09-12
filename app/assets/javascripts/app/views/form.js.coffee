@@ -61,9 +61,9 @@ class App.FormView extends Backbone.View
     @open_info_dialog({action: action, details: details})
 
     if @view_name == 'civil'
-      @list_generals_actions('#development-general-template', action, '')
+      @list_generals_actions("##{@view_name}-general-template", action, '')
     else
-      @list_generals('#development-general-template', action, @view_attribute)
+      @list_generals("##{@view_name}-general-template", action, @view_attribute)
 
   open_container: (options) ->
     $('#view-content').html(_.template($("##{options.view_name}-container-template").html(), {button: options.action, action:"#{options.action.replace(/[aeiou]$/, '').replace( /\s/g, '_')}ing"}))

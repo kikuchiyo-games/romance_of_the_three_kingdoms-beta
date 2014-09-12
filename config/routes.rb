@@ -2,6 +2,8 @@ RomanceOfTheThreeKingdoms::Application.routes.draw do
 
   root :to => 'home#index'
 
+  match 'country' => 'country#index'
+
   resources 'game_provinces' do
     match 'prevent_crime'  => 'game_provinces/province_safety_patrols#update'
     match 'prevent_famine' => 'game_provinces/province_land_investments#update'

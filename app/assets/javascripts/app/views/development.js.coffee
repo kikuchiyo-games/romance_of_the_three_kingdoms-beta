@@ -32,7 +32,7 @@ class App.DevelopmentView extends App.FormView
     value = $('#development_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'land quality', decreased_by: value, increased_by: '5%')
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'gold reserves', increase: 'land quality', decreased_by: value, increased_by: '5%', messenger: @fake_generals[0])
 
   commerce_invest: ->
     value = $('#development_value').val()
