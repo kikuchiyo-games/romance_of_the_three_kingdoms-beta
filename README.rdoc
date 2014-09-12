@@ -101,3 +101,7 @@
 ==== Technologies    
   1. Using bootstrap 
   2. Should use Backbone for various info, civil, deplomacy, etc... views
+
+==== Demos
+  1. without map: localhost://3000/game_provinces/1
+  1. with map:  localhost://3000/game_provinces/1?map=true
