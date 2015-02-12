@@ -27,22 +27,22 @@ class App.MilitaryView extends App.FormView
     value = $('#military_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop conscripting successful!', message: "troop count has increased by #{value}")
+      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop conscripting successful!', message: "troop count has increased by #{value}", messenger: @fake_generals[0])
 
   equip_troops: ->
     value = $('#military_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop equiping successful!', message: "troop arms have increased by #{value}")
+      App.nav_view.sub_views['report'].standard_report(type: 'success', subject: 'troop equiping successful!', message: "troop arms have increased by #{value}", messenger: @fake_generals[0])
 
    draft_troops: ->
     value = $('#military_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(decrease: 'the people\'s loyalty', increase: 'troop count', increased_by: value, decreased_by: '5%')
+      App.nav_view.sub_views['report'].report_resource_details(decrease: 'the people\'s loyalty', increase: 'troop count', increased_by: value, decreased_by: '5%', messenger: @fake_generals[0])
 
    release_troops: ->
     value = $('#military_value').val()
     if @verify_form('integer', value)
       @render()
-      App.nav_view.sub_views['report'].report_resource_details(increase: 'the people\'s loyalty', decrease: 'troop count', decreased_by: value, increased_by: '5%')
+      App.nav_view.sub_views['report'].report_resource_details(increase: 'the people\'s loyalty', decrease: 'troop count', decreased_by: value, increased_by: '5%', messenger: @fake_generals[0])
